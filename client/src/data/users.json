@@ -68,7 +68,7 @@
     "username": "Maxime_Nienow",
     "email": "Sherwood@rosamond.me",
     "password": "student",
-    "status": "STUDENT",
+    "status": "MENTOR",
     "city": "London"
   },
   {
@@ -77,7 +77,7 @@
     "username": "Delphine",
     "email": "Chaim_McDermott@dana.io",
     "password": "student",
-    "status": "STUDENT",
+    "status": "MENTOR",
     "city": "London"
   },
   {
