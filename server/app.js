@@ -2,8 +2,14 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
+// import mongoose from "mongoose";
 
 import apiRouter from "./api";
+
+
+// connect to DB 
+// mongoose.connect("mongodb+srv://semi:colon@mflix-2ykku.mongodb.net/test?retryWrites=true&w=majority",
+//   { useNewUrlParser: true });
 
 const apiRoot = "/api";
 const app = express();
