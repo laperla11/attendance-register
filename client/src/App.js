@@ -4,7 +4,7 @@ import LoginMentors from "./components/LoginMentors";
 import LoginAdmin from "./components/LoginAdmin";
 import Navigation from "./components/Navigation";
 import NavigationBar from "./components/NavigationBar";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch } from "react-router-dom";
 import { getMessage } from "./service";
 
 import "./App.css";
@@ -21,23 +21,21 @@ export class App extends Component {
     return (
       <div>
         <div className="flex-container">
-          <BrowserRouter>
+          <HashRouter>
             <NavigationBar />
 
             <Switch>
-
-              <Route path="/LoginAdmin" component={LoginAdmin} />
-              <Route path="/LoginMentors" component={LoginMentors} />
-              <Route path="/LoginStudent" component={LoginStudent} />
+              <Route path="/admin" component={LoginAdmin} />
+              <Route path="/mentor" component={LoginMentors} />
+              <Route path="/student" component={LoginStudent} />
             </Switch>
 
             <Navigation />
-          </BrowserRouter>
+          </HashRouter>
         </div>
         {/* <p className="message" data-qa="message">
           {message}
         </p> */}
-      
       </div>
     );
   }

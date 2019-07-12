@@ -1,31 +1,23 @@
 body{
   margin:0;
 }
-
-
+/*this is a container of all login page*/
 .flex-container {
   background-color: #c6ae82;
- 
   height:100vh;
- 
-    display: flex;
-   
-    flex-direction: column;
-   
-    flex-wrap: nowrap;
-   
-    justify-content: space-between;
-   
-    align-content: stretch;
-   
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: stretch;
+  align-items: center;
     }
 
-
+/* a container for login form*/
 .form-container{
-  width: 400px;
-  margin: 16px auto;
-  font-size: 16px;
+width: 400px;
+margin: 16px auto;
+font-size: 16px;
   
 }
 .form-container input{
@@ -52,6 +44,7 @@ body{
 .form-container h2{
   margin-left: 80px;
 }
+
 .user-icon{
   width:70px;
   height:70px;
@@ -59,7 +52,7 @@ body{
  
 }
 .form-group{
-   background:#c6ae82;
+  background:#c6ae82;
   padding: 12px;
  
 }
@@ -69,6 +62,7 @@ body{
   border-color: #bbb;
   color: #555;
 }
+/* the top nvigation bar*/
   .nav-top{
     display: flex;
     flex-direction: row;
@@ -99,6 +93,7 @@ body{
     align-content: center;
     
 }
+/* the top cyf image*/
 .image{
   width:300px;
   height:100px;
@@ -122,20 +117,12 @@ body{
 .buttons {
   margin:auto;
   height:280px;
-
- 
- 
-    display: flex;
-  
-    flex-direction: row;
-  
-    flex-wrap: nowrap;
-    
-    justify-content: space-around;
-  
-    align-content: stretch;
-    
-    align-items: flex-start;
+  display: flex;
+  flex-direction: row;  
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-content: stretch;
+  align-items: flex-start;
     }
 
 /* ul{
@@ -150,9 +137,7 @@ body{
 } */
 nav ul li {
     
-    font-size: 16px;
- 
-   
+    font-size: 16px; 
     width: 12em;
     height: 3em;
     text-transform: uppercase;
@@ -171,7 +156,7 @@ nav ul li {
 
 
 
-  ?*section.container{
+  *section.container{
     min-width: 500px;
     margin: 10% auto;
     text-align: center;

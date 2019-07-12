@@ -7,7 +7,7 @@ const Navigation = () => {
       <nav>
         <ul className='buttons'>
           <li>
-            <NavLink className="nav" to="/LoginAdmin">
+            <NavLink className="nav" to="/admin">
               <button data-hover="click me!">
                 <div>Admin?</div>
               </button>
@@ -18,7 +18,7 @@ const Navigation = () => {
             <span />
           </li>
           <li>
-            <NavLink className="nav" to="/LoginStudent">
+            <NavLink className="nav" to="/student">
               <button data-hover="click me!">
                 <div>student?</div>
               </button>
@@ -29,7 +29,7 @@ const Navigation = () => {
             <span />
           </li>
           <li>
-            <NavLink className="nav" to="/LoginMentors">
+            <NavLink className="nav" to="/mentor">
               <button data-hover="click me!">
                 <div>Mentor?</div>
               </button>
