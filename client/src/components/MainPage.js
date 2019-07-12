@@ -23,11 +23,12 @@ export default class MainPage extends React.Component{
                 </div>
                 <div id="id01" className="modal">
                    {/* <p className="message" data-qa="message"> */}
-                    {/* {message} */}
+                    {/* {message}
+                   */}
                    {/* </p> */}
                 </div>
               </div>
-               
+              <Test />
             </div>
         )
     }
