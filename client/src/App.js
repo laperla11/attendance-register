@@ -20,7 +20,7 @@ export class App extends Component {
     const { message } = this.state;
     return (
       <div>
-        <div className="all-container">
+        <div className="flex-container">
           <BrowserRouter>
             <NavigationBar />
 
@@ -34,9 +34,9 @@ export class App extends Component {
             <Navigation />
           </BrowserRouter>
         </div>
-        <p className="message" data-qa="message">
+        {/* <p className="message" data-qa="message">
           {message}
-        </p>
+        </p> */}
       
       </div>
     );

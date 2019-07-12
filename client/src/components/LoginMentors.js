@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import user from '../picture/user.svg'
 
 export class LoginMentor extends Component {
   state = {
@@ -18,8 +19,9 @@ export class LoginMentor extends Component {
           <form className="form-internal">
             <div className="form-group">
               <h2 className="welcome">Welcome! Mentor</h2>
-              <span className="glyphicon glyphicon-user" />
-              <label htmlFor="exampleInputEmail1">Email address</label>
+              <img className='user-icon' src={user}></img>
+              
+
               <input
                 onChange={event => this.setState({ email: event.target.value })}
                 type="email"
@@ -29,12 +31,8 @@ export class LoginMentor extends Component {
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
               />
-              <small id="emailHelp" className="form-text text-muted">
-                We'll never share your email with anyone else.
-              </small>
             </div>
             <div className="form-group">
-              <label>Password</label>
               <input
                 autoComplete="off"
                 onChange={event =>
@@ -46,22 +44,13 @@ export class LoginMentor extends Component {
                 placeholder="Password"
               />
             </div>
-            <div className="form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="exampleCheck1"
-              />
-              <label className="form-check-label" htmlFor="exampleCheck1">
-                Check me out
-              </label>
-            </div>
+
             <button
               onClick={event => this.signIn(event)}
               type="submit"
               className="btn btn-primary"
             >
-              Submit
+              Login
             </button>
           </form>
         </div>

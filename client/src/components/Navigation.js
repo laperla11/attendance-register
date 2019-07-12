@@ -1,22 +1,46 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navigation = () => {
   return (
-   
-      <div class="container">
-       
-      <Link to="/LoginStudent">
-        <button className='button'>Login Student</button>
-      </Link>
-
-      <Link to="/LoginMentors">
-        <button className='button'>Login Mentor</button>
-      </Link>
-
-      <Link to="/LoginAdmin">
-        <button className='button'>Login Admin</button>
-      </Link>
+    <div >
+      <nav>
+        <ul className='buttons'>
+          <li>
+            <NavLink className="nav" to="/LoginAdmin">
+              <button data-hover="click me!">
+                <div>Admin?</div>
+              </button>
+            </NavLink>
+            <span />
+            <span />
+            <span />
+            <span />
+          </li>
+          <li>
+            <NavLink className="nav" to="/LoginStudent">
+              <button data-hover="click me!">
+                <div>student?</div>
+              </button>
+            </NavLink>
+            <span />
+            <span />
+            <span />
+            <span />
+          </li>
+          <li>
+            <NavLink className="nav" to="/LoginMentors">
+              <button data-hover="click me!">
+                <div>Mentor?</div>
+              </button>
+            </NavLink>
+            <span />
+            <span />
+            <span />
+            <span />
+          </li>
+        </ul>
+      </nav>
     </div>
   );
 };
