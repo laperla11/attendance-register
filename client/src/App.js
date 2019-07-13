@@ -1,4 +1,15 @@
 import React, { Component } from "react";
+import MainPage from "./components/MainPage"
+import { getMessage } from "./service";
+import logo from "./logo.svg";
+import "./App.css";
+import Test from "./components/Test";
+import { Route, Link, BrowserRouter as Router } from "react-router-dom"
+import SignUp from "./components/Signup";
+
+export class App extends Component {
+  state = { message: "Loading..." };
+=======
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./Component/Header";
@@ -18,6 +29,11 @@ class App extends Component {
   render() {
 
     return (
+      <Router>
+        <Route path="/Signup" component={SignUp} />
+        <Route path="/" component={MainPage} />
+         {/* <Route path="/Test"component={Test} />  */}
+      </Router>
 
       <Router>
         <header className="header">
@@ -36,7 +52,6 @@ class App extends Component {
           <p>Semi-colon, Copyright july 2019</p>
         </footer>
       </Router >
-
     );
   }
 }

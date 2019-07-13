@@ -11,7 +11,7 @@ export default class Test extends Component {
     const { users, modules } = this.state;
 
     return (
-      <div>
+      <div className="userInfo">
         <h2>User list</h2>
         <table>
           <thead>
