@@ -48,7 +48,7 @@ export class LoginMentor extends Component {
             <button
               onClick={event => this.signIn(event)}
               type="submit"
-              className="btn btn-primary"
+              className="myButton"
             >
               Login
             </button>

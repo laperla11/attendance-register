@@ -42,7 +42,7 @@ class LoginAdmin extends Component {
 
             <button
               type="submit"
-              className="btn btn-primary"
+              className=" myButton"
               onClick={event => this.signIn(event)}
             >
               Login

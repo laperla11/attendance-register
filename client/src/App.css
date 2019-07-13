@@ -1,59 +1,60 @@
-body{
-  margin:0;
+body {
+  margin: 0;
 }
+
 /*this is a container of all login page*/
 .flex-container {
   background-color: #c6ae82;
-  height:100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: space-between;
   align-content: stretch;
   align-items: center;
-    }
-/* top logo nav*/
+}
+
+/* top logo navigation with cyf logo*/
 
 .logo-nav {
   height: 50px;
   width: 100%;
- 
   position: relative;
 }
 
-.logo-nav > .logo-nav-header {
+.logo-nav>.logo-nav-header {
   display: inline;
 }
 
-.logo-nav > .logo-nav-header > .logo-nav-title {
+.logo-nav>.logo-nav-header>.logo-nav-title {
   display: inline-block;
   font-size: 22px;
   color: #fff;
   padding: 10px 10px 10px 10px;
 }
 
-.logo-nav > .logo-nav-btn {
+.logo-nav>.logo-nav-btn {
   display: none;
 }
 
-.logo-nav > .logo-nav-links {
+.logo-nav>.logo-nav-links {
   display: inline;
   float: right;
   font-size: 18px;
 }
 
-.logo-nav > .logo-nav-links > a {
+.logo-nav>.logo-nav-links>a {
   display: inline-block;
   padding: 13px 10px 13px 10px;
   text-decoration: none;
   color: #333333;
 }
 
-.logo-nav > .logo-nav-links > a:hover {
+.logo-nav>.logo-nav-links>a:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.logo-nav > #nav-check {
+.logo-nav>#nav-check {
   display: none;
 }
 
@@ -104,13 +105,14 @@ body{
 
 
 /* a container for login form*/
-.form-container{
-width: 400px;
-margin: 16px auto;
-font-size: 16px;
-  
+.form-container {
+  width: 400px;
+  margin: 16px auto;
+  font-size: 16px;
+
 }
-.form-container input{
+
+.form-container input {
   border-radius: 10px;
   box-sizing: border-box;
   display: block;
@@ -119,137 +121,219 @@ font-size: 16px;
   border-style: solid;
   padding: 16px;
   outline: 0;
+  color: #333333;
   font-family: inherit;
   font-size: 0.95em;
 }
-.form-container button{
+
+.myButton {
   background-color: #ca392e;
-  border-radius: 15px;
-  width:40px;
-  margin-left:150px;
-  
-  
-  
+
+  border-radius: 20px;
+  border: 1px solid black;
+  display: inline-block;
+  cursor: pointer;
+  color: #333333;
+  font-family: Arial;
+  font-size: 20px;
+  padding: 16px 31px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #2f6627;
+  margin-left: 120px;
+  margin-top: 20px;
 }
-.form-container h2{
+
+.myButton:hover {
+  background-color: #c6ae82;
+}
+
+.myButton:active {
+  position: relative;
+  top: 1px;
+}
+
+.form-container h2 {
   margin-left: 80px;
 }
 
-.user-icon{
-  width:70px;
-  height:70px;
+.user-icon {
+  width: 70px;
+  height: 70px;
   margin-left: 120px;
- 
+
 }
-.form-group{
-  background:#c6ae82;
+
+.form-group {
+  background: #c6ae82;
   padding: 12px;
- 
+
 }
+
 .form-container input[type="email"],
 .form-container input[type="password"] {
   background: #fff;
   border-color: #bbb;
-  color: #555;
+  color: #333333;
+  ;
 }
+
 /* the top nvigation bar*/
-  
+
 /* the top cyf image*/
-.image{
-  width:300px;
-  height:100px;
-  margin-right:1200px;
+.image {
+  width: 300px;
+  height: 100px;
+  margin-right: 1200px;
 }
 
 
 .buttons {
-  margin:auto;
-  height:280px;
+  margin: auto;
+  height: 280px;
+  color: #333333;
   display: flex;
-  flex-direction: row;  
+  flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-around;
   align-content: stretch;
   align-items: flex-start;
-    }
+}
 
 /* ul{
   border:solid 2px;
   display: flex;
  
  justify-content: flex-end;
-
-
- 
  
 } */
 nav ul li {
-    
-    font-size: 16px; 
-    width: 12em;
-    height: 3em;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-family: sans-serif;
-    letter-spacing: 0.1em;
-    text-align: center;
-   
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    transition: 0.5s;
-    margin: 1em;
+
+  font-size: 16px;
+  color: #333333;
+  width: 12em;
+  height: 3em;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: sans-serif;
+  letter-spacing: 0.1em;
+  text-align: center;
+
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: 0.5s;
+  margin: 1em;
+}
+
+a:hover {
+  border-bottom: 1px solid red;
+}
+
+h1 {
+  font-size: 2em;
+  padding: 20px 0;
+}
+
+button:hover {
+  cursor: pointer
+}
+
+button {
+  background: transparent;
+  outline: none;
+  position: relative;
+  border: 2px solid #111;
+  padding: 15px 50px;
+  overflow: hidden;
+}
+
+/*button:before (attr data-hover)*/
+button:hover:before {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+button:before {
+  content: attr(data-hover);
+  position: absolute;
+  top: 1.1em;
+  left: 0;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 800;
+  font-size: .8em;
+  color: #333333;
+  opacity: 0;
+  transform: translate(-100%, 0);
+  transition: all .3s ease-in-out;
+}
+
+/*button div (button text before hover)*/
+button:hover div {
+  opacity: 0;
+  transform: translate(100%, 0)
+}
+
+button div {
+  text-transform: uppercase;
+  color: #333333;
+  letter-spacing: 3px;
+  font-weight: 800;
+  font-size: .8em;
+  transition: all .3s ease-in-out;
 }
 
 
+media-query.css
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
 
+@media (min-width: 1281px) {}
 
-  *section.container{
-    min-width: 500px;
-    margin: 10% auto;
-    text-align: center;
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1025px) and (max-width: 1280px) {}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {}
+.buttons{
+   display: flex;
+   flex-wrap: wrap;
+  
   }
-    a:hover{border-bottom: 1px solid #111;} 
-    h1{font-size: 2em; padding: 20px 0;}
-    p{
-      font-size: .75em;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      padding: 20px 0;
-    }
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
 
-    button:hover{cursor: pointer}
-    button {
-      background: transparent; outline: none;
-      position: relative;
-      border: 2px solid #111;
-      padding: 15px 50px;
-      overflow: hidden;
-    }
-
-    /*button:before (attr data-hover)*/
-    button:hover:before{opacity: 1; transform: translate(0,0);}
-    button:before{
-      content: attr(data-hover);
-      position: absolute;
-      top: 1.1em; left: 0;
-      width: 100%;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-weight: 800;
-      font-size: .8em;
-      opacity: 0;
-      transform: translate(-100%,0);
-      transition: all .3s ease-in-out;
-    }
-      /*button div (button text before hover)*/
-      button:hover div{opacity: 0; transform: translate(100%,0)}
-      button div{
-        text-transform: uppercase;
-        letter-spacing: 3px;
-        font-weight: 800;
-        font-size: .8em;
-        transition: all .3s ease-in-out;
-      }
-
-
+@media (min-width: 320px) and (max-width: 480px) {
+  .buttons{
+   display: flex;
+   flex-wrap: wrap;
+  
+  }
+}

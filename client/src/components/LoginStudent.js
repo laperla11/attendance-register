@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import user from '../picture/user.svg'
+import user from "../picture/user.svg";
 export class LoginStudent extends Component {
   state = {
     email: "",
@@ -15,11 +15,10 @@ export class LoginStudent extends Component {
     return (
       <div className="form-container">
         <div className="form-group">
-          
           <form className="form-internal">
             <div className="form-group">
               <h2 className="welcome">Welcome! Student</h2>
-              <img className='user-icon' src={user}></img>
+              <img className="user-icon" src={user} />
 
               <input
                 onChange={event => this.setState({ email: event.target.value })}
@@ -44,9 +43,9 @@ export class LoginStudent extends Component {
             <button
               onClick={event => this.signIn(event)}
               type="submit"
-              className="btn btn-primary"
+              className="myButton"
             >
-           Login
+              Login
             </button>
           </form>
         </div>
