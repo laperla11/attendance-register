@@ -6,87 +6,6 @@ body {
   background-color:#c6ae82; 
 }
 
-.logo {
-  width: 100px;
-}
-
-.message {
-  color: blue;
-}
-
-.message:hover {
-  background-color: yellow;
-}
-
-/* Full-width input fields */
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
-}
-
-/* Add a background color when the inputs get focus */
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-/* Set a style for all buttons */
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  opacity: 0.9;
-  text-align: center;
-}
-
-button:hover {
-  opacity:1;
-}
-
-/* Add padding to container elements */
-.container {
-  padding: 16px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-  display: flex;
-  background-color:#c6ae82;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888;
-  width: 70%; /* Could be more or less, depending on screen size */
-}
-
-/* Style the horizontal ruler */
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
-
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-  .cancelbtn, .signupbtn {
-     width: 100%;
-  }
-}
-
-.App_form{
-  display: flex;
-  height: 140px;
-  position: fixed;
-  top:0;
-  left:0;
-  width: 100%;
-  background-color: #c6ae82;
-}
-
 .pageSwitcher{
   text-align: right;
   width:75%;
@@ -267,17 +186,4 @@ width: 100%;
 .student:hover{
   background: rgb(190, 15, 15);
   color: white;
-}
-
-.mentor:hover{
-   background: rgb(190, 15, 15);
-  color: white;
-}
-
-@media screen and (max-width: 705px){
-  .header {
-    -webkit-background: red;
-    -ms-background: row;
-  background: white;
-  }
 }
