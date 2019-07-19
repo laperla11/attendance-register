@@ -11,12 +11,13 @@
   padding-left: 5px;
   padding-right: 15px;
 }
-.navbar-brand
-.navbar-nav .nav-link {
-  color: #414141;
-  &&:hoover {
-    color: black;
-  }
+
+nav-link {
+  color: red;
+ 
+}
+Nav.Link:hoover {
+  color: red;
 }
 
  
@@ -64,7 +65,7 @@
   .content {
     position: fixed;
   background-color: #34495e;
-    top: 100px;
+    top: 130px;
     left: 50%;
     transform: translate(-50%, -50%);
     height: 90px;
@@ -124,4 +125,5 @@
     line-height: 40px;
     color:white;
   }
+  
   }

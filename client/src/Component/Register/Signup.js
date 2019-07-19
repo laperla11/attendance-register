@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { validateAll } from 'indicative/validator'
+
 
 import {
   Container, Col, Form,
@@ -60,7 +60,7 @@ class SignUp extends Component {
           if (res.status !== 200) {
             alert(json.msg);
           } else {
-            this.props.history.push("/thankYou");
+            this.props.history.push("/thankYou ");
           }
         } catch (err) {
           console.log(err);
