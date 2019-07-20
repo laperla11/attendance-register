@@ -100,10 +100,10 @@ class login extends Component {
   
     confirmLocation = (poslat, poslong) => {
       console.log(poslat, poslong);
-      const positionOfCYFOffice = { lat: 51.748000, lon:-0.3666 };
-      const positionOfticketMaster = { lat: 51.748000, lon: -0.3666};
-      const myHome = { lat: 51.52, lon: -0.366666 };
-      const radius = 5000; // meters
+      const positionOfCYFOffice = { lat: 51.53, lon: -0.05 };
+      const positionOfticketMaster = { lat: 51.53, lon: -0.1 };
+      const myHome = { lat: 51.52, lon: -0.36 };
+      const radius = 1000; // meters
       const result = insideCircle(
         { lat: poslat, lon: poslong },
         myHome,
@@ -178,12 +178,12 @@ class login extends Component {
                 <Button  onClick={(e) => this.handleSubmit(e)}
                 type="submit"
                 className="btn mentor"
-                value="STUDENT">Login as Mentor</Button>{''}
+                value="MENTOR">Login as Mentor</Button>
                 <Button  onClick={(e) => this.handleSubmit(e)}
                 type="submit"
                 className="btn admin"
-                value="STUDENT">Login as admin</Button></div>
-                 <h6 className='position'>Your Position :
+                value="ADMIN">Login as Admin</Button></div>
+                 <h5 className='position'>Your Position : <br></br>
             <span >Lat : {position.latitude}</span><br/>
             <span >Long : {position.longitude}</span></h6>
             {status.toLocaleLowerCase() == "student" &&
