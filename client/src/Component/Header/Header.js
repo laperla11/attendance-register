@@ -18,10 +18,11 @@ function Header() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             <NavItem>
-              <Nav.Link href="/#">Login</Nav.Link>
+              <Nav.Link href="/#">Log in</Nav.Link>
        </NavItem>
+          
             <NavItem> 
-              <Nav.Link href="/#/signUp" >signUp</Nav.Link>
+              <Nav.Link href="/#/signUp" >Sign Up</Nav.Link>
             </NavItem>
           </Nav>
         </Navbar.Collapse>

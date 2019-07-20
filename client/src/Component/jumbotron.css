@@ -209,12 +209,26 @@
     ##Screen = B/w 1025px to 1280px
   */
   
-  @media (min-width: 1023px) and (max-width: 1280px) {
+  @media (min-width: 1024px) and (max-width: 1367px) {
     
     .jumbo{
       background-color:#34495e;
-    height:20vh;
+    height:15vh;
     }
+    .btn{
+      padding:20px;
+    }
+    .App{
+      height:69vh;
+    }
+    label{
+      font-size:1em
+    
+    }
+    :placeholder{
+      width:200px;
+    }
+ 
     .content {
       position: absolute;
       top: 350px;
@@ -223,7 +237,7 @@
       height: 100px;
       overflow: hidden;
       font-family: 'Lato', sans-serif;
-      font-size: 50px;
+   
       line-height: 40px;
       color:white;
     }
@@ -283,13 +297,14 @@
     
   .jumbo{
     margin-bottom:0;
+    height:40px;
    
   }
      
   .content {
-    position: absolute;
+    position: relative;
     background-color:#34495e; 
-    top: 100px;
+    top: 5px;
     left: 60%;
     transform: translate(-50%, -50%);
     height: 50px;
