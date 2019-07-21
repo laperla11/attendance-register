@@ -10,10 +10,10 @@ export class Jumbotron extends Component {
     return (
     
      
-        <Jumbo fluid className="jumbo">
+        <Jumbo fluid >
           <div className="overlay" />
-          <Container>
-              <div className="content">
+          <Container fluid>
+              <div className='d-flex justify-content-center'>
                 <div className="content__container">
                   <p className="content__container__text">
                   Hello

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import {
-  Container, Col,Row, Form,
+  Container, Col, Form,
   FormGroup, Label, Input,
   Button, FormText, FormFeedback,
 } from 'reactstrap';
-import { UncontrolledAlert } from 'reactstrap';
 import { withRouter, Browserhistory as history } from "react-router-dom";
-
 
 import './index.css'
 import { insideCircle } from "geolocation-utils";
@@ -68,7 +66,6 @@ class login extends Component {
           } else {
             if (status.toUpperCase() === "STUDENT") {
               return this.props.history.push("/studentRegistered");
-
             } else if (status.toUpperCase() === "MENTOR") {
               return this.props.history.push("/mentorHome");
             } else if (status.toUpperCase() === "ADMIN") {
@@ -106,7 +103,7 @@ class login extends Component {
       const radius = 1000; // meters
       const result = insideCircle(
         { lat: poslat, lon: poslong },
-        myHome,
+        positionOfCYFOffice,
         // myHome,
         radius
       );
@@ -129,12 +126,11 @@ class login extends Component {
     const { email, password,status,position,  isPositionConfirmed } = this.state;
     return (
       <Container className="App">
-       
+        <h2>Sign In</h2>
         <Form className="form" >
-          <Col  md={6}>
-            <FormGroup >
-            <h2>Sign In</h2>
-              <Label>Email</Label>
+          <Col md={6}>
+            <FormGroup>
+              <Label>Username</Label>
               <Input
                 type="email"
                 name="email"
@@ -157,7 +153,7 @@ class login extends Component {
               <FormText>Your username is most likely your email.</FormText>
             </FormGroup>
           </Col>
-          <Col  md={6}>
+          <Col md={6}>
             <FormGroup>
               <Label for="examplePassword">Password</Label>
               <Input
@@ -169,7 +165,7 @@ class login extends Component {
                 onChange={ (e) => this.handleChange(e) }
             />
             </FormGroup>
-          </Col >
+          </Col>
           <div className="button-group">
           <Button  onClick={(e) => this.handleSubmit(e)}
                 type="submit"
@@ -185,22 +181,15 @@ class login extends Component {
                 value="ADMIN">Login as Admin</Button></div>
                  <h5 className='position'>Your Position : <br></br>
             <span >Lat : {position.latitude}</span><br/>
-            <span >Long : {position.longitude}</span></h6>
+            <span >Long : {position.longitude}</span></h5>
             {status.toLocaleLowerCase() == "student" &&
               isPositionConfirmed != "notChecked" &&
               !isPositionConfirmed ? (
-
-<UncontrolledAlert color="warning">
-<p className="mb-0" >Check your location , you are not at the class yet, hurry up!</p>
-    </UncontrolledAlert>
-         
-                  
-                
+                <p>
+                  Check your location , you are not at the class yet, hurry up!
+                </p>
               ) : isPositionConfirmed === "confirmed" ? (
-<UncontrolledAlert color="info">
-Your position is confirmed, enjoy the class!
-    </UncontrolledAlert>
-
+                <p>Your position is confirmed, enjoy the class!</p>
               ) : null}
       </Form>
 

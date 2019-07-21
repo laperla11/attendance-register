@@ -1,33 +1,45 @@
 import React from "react";
-import { Nav, Navbar, NavItem } from "react-bootstrap";
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
 import './index.css'
 
+export default class Header extends React.Component {
+  constructor(props) {
+    super(props);
 
-function Header() {
-  return (
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.state = {
+      collapsed: true
+    };
+  }
 
-      <Navbar expand="lg">
-        <Navbar.Brand>
-          <img
+  toggleNavbar() {
+    this.setState({
+      collapsed: !this.state.collapsed
+    });
+  }
+  render() {
+    return (
+      <div>
+        <Navbar color="faded" light>
+          <NavbarBrand href="/" className="mr-auto"> <img
             className="img-responsive logo"
             src="https://codeyourfuture.io/wp-content/uploads/2019/03/cyf_brand.png"
-          />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto">
-            <NavItem>
-              <Nav.Link href="/#">Log in</Nav.Link>
-       </NavItem>
-          
-            <NavItem> 
-              <Nav.Link href="/#/signUp" >Sign Up</Nav.Link>
-            </NavItem>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-  
-  );
+          /></NavbarBrand>
+          <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+          <Collapse isOpen={!this.state.collapsed} navbar>
+            <Nav navbar>
+              <NavItem>
+                <NavLink href="/#/">Sign In</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="/#/signUp" >Sign Up</NavLink>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
+      </div>
+    );
+  }
 }
-export default Header;
+
