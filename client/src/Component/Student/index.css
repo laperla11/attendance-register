@@ -1,0 +1,17 @@
+
+.attendance{
+display: flex;
+justify-content: center;
+align-items: center;
+width: 400px;
+height: 380px;
+}
+.attendance h2{
+font-size: 25px;
+padding: 10px;
+ background: rgb(30, 156, 58);
+}
+
+.attendance img{
+  max-width: 100%;
+}

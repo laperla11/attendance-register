@@ -1,0 +1,113 @@
+
+/* //sign up */
+.main{
+  text-align: center;
+  width: auto;
+  margin: auto;
+min-height: calc(100vh - 11rem);
+}
+
+.main h1{
+  color: #3e4140;
+}
+
+.user{
+  width: 100px;
+    margin: 10px auto;
+}
+
+.user img{
+  max-width: 100%;
+  color: #6e7271;
+}
+
+.btnSection{
+  margin-top: 3rem;
+display: flex;
+ justify-content: space-around;
+width: 100%;
+
+}
+
+.form {
+width: 600px;
+margin: auto;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+border-left: 1px solid  rgb(190, 15, 15);
+border-right: 1px solid  rgb(190, 15, 15);
+}
+
+.form input{
+  max-width: 100%;
+  display: block;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  border: none;
+   background: #dfc492;
+}
+
+.btn{
+  display: block;
+  /* width: 100px; */
+  padding: 1rem;
+  border-radius: 10px;
+   border: none;
+   cursor: pointer;
+     background: #dfc492;
+   /* background:  #a8936b; */
+   color: #2c2e2d;
+   font-size: 13px;
+}
+.student, .mentor{
+  background: #3e4140;
+   color: white;
+}
+
+.admin{
+  background: #D62C2A;
+  color: white;
+}
+
+.student:hover, .mentor:hover, .admin:hover{
+  background: rgb(30, 156, 58);
+}
+
+@media screen and (max-width: 600px){
+.main{
+width: 100%;
+padding-top: 1rem;
+
+}
+.user{
+  width: 80px;
+    margin: 10px auto;
+}
+.btn{
+  background: #3e4140;
+ color: white;
+ margin-bottom: 1rem;
+ width: 40%;
+}
+
+.btnSection{
+flex-direction: column;
+ align-items: center;
+}
+.form{
+  width: auto;
+  border: none;
+}
+
+.admin{
+  background: #D62C2A;
+}
+
+.student:hover, .mentor:hover, .admin:hover{
+  background: rgb(30, 156, 58);
+}
+
+}
