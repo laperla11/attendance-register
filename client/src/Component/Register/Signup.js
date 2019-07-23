@@ -93,10 +93,10 @@ class SignUp extends Component {
   render() {
     const { name,email, password } = this.state;
     return (
-      <Container className="App">
-        <h2>SignUp</h2>
+    
+       
         <Form className="form" >
-          <Col>
+          <Col md={6}>
           <FormGroup>
               <Label>Name</Label>
               <Input
@@ -113,11 +113,12 @@ class SignUp extends Component {
               <FormFeedback valid>
                 That's a tasty looking name you've got there.
               </FormFeedback>
-              
-             
+                           
             </FormGroup>
+            </Col>
+            <Col md={6}>
             <FormGroup>
-              <Label>email</Label>
+              <Label>Email</Label>
               <Input
                 type="email"
                 name="email"
@@ -137,10 +138,11 @@ class SignUp extends Component {
               <FormFeedback>
                 Uh oh! Looks like there is an issue with your email. Please input a correct email.
               </FormFeedback>
-              <FormText>Your username is most likely your email.</FormText>
+             
             </FormGroup>
-          </Col>
-          <Col>
+         </Col >
+          <Col md={6}>
+         
             <FormGroup>
               <Label for="Password">Password</Label>
               <Input
@@ -155,7 +157,7 @@ class SignUp extends Component {
                     
          
           </Col>
-          <div className='button-group'>
+        
           <Button  onClick={(e) => this.handleSubmit(e)}
                 type="submit"
                 className="btn student"
@@ -165,12 +167,12 @@ class SignUp extends Component {
                 type="submit"
                 className="btn mentor"
                 value="STUDENT">Sign Up as Mentor</Button>
-</div>
+
                
       </Form>
 
 
-      </Container>
+    
     );
   
 }

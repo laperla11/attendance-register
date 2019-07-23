@@ -15,3 +15,35 @@ padding: 10px;
 .attendance img{
   max-width: 100%;
 }
+@media (min-width: 320px) and (max-width: 480px) {
+ 
+.main{
+  display: flex;
+ flex-direction: column;
+  justify-content: space-around;
+  
+  width: 100px;
+  height: 180px;
+  }
+
+.attendance img{
+  max-width: 50%;
+}
+.attendance h2{
+  font-size: 15px;
+  padding: 5px;
+   background: rgb(30, 156, 58);
+  }
+  .attendance h1{
+    font-size: 15px;
+  }
+}
+@media (min-width: 481px) and (max-width: 767px){
+
+}
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape){
+
+}
+@media (min-width: 768px) and (max-width: 1024px) {}
+@media (min-width: 1023px) and (max-width: 1280px) {
+}

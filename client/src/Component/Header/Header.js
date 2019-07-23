@@ -1,33 +1,75 @@
-import React from "react";
-import { Nav, Navbar, NavItem } from "react-bootstrap";
+import React from 'react';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem } from 'reactstrap';
 
-import './index.css'
 
+export default class Header extends React.Component {
+  constructor(props) {
+    super(props);
 
-function Header() {
-  return (
-
-      <Navbar expand="lg">
-        <Navbar.Brand>
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      isOpen: false
+    };
+  }
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+  render() {
+    return (
+      <div>
+        <Navbar color="light" light expand="md">
+          <NavbarBrand href="/">
           <img
-            className="img-responsive logo"
-            src="https://codeyourfuture.io/wp-content/uploads/2019/03/cyf_brand.png"
-          />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto">
-            <NavItem>
-              <Nav.Link href="/#">Log in</Nav.Link>
-       </NavItem>
-          
-            <NavItem> 
-              <Nav.Link href="/#/signUp" >Sign Up</Nav.Link>
-            </NavItem>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-  
-  );
+        alt="cyf_logo"
+        src='https://codeyourfuture.io/wp-content/uploads/2019/03/cyf_brand.png'
+      
+        height="30"
+        className="d-inline-block align-top"></img>
+    
+            </NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink href="/#/">Sign In</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink href="//">signUp</NavLink>
+              </NavItem>
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Settings
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>
+                   Email Reset
+                  </DropdownItem>
+                  <DropdownItem>
+                   Password Reset
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem>
+                   Help
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            </Nav>
+          </Collapse>
+        </Navbar>
+      </div>
+    );
+  }
 }
-export default Header;

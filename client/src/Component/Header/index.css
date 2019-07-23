@@ -83,7 +83,7 @@ Nav.Link:hoover {
     ##Screen = B/w 768px to 1024px
   */
   
-  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  @media (min-width: 767px) and (max-width: 1024px) and (orientation: landscape) {
     
    
     
