@@ -14,20 +14,21 @@ class MentorHome extends Component {
     };
   }
 
-  componentDidMount() {
-    // fetch("https://jsonplaceholder.typicode.com/users")
-    // fetch("api/attendance")
-    fetch(`api/attendance?date=today`)
-      .then(data => data.json())
-      .then(data => this.setState({ students: data }));
+  componentWillMount() {
+    this.setState({ selectedSession: "today" }, () => this.fetchData());
   }
 
+  fetchData = () => {
+    fetch(`api/attendance?date=${this.state.selectedSession}`)
+      // fetch("https://jsonplaceholder.typicode.com/users")
+      // fetch("api/attendance")
+      .then(data => data.json())
+      .then(data => this.setState({ students: data }));
+  };
   selectSession = e => {
-    this.setState({ selectedSession: e.target.value }, () => {
-      fetch(`api/attendance?date=${this.state.selectedSession}`)
-        .then(data => data.json())
-        .then(data => this.setState({ students: data }));
-    });
+    this.setState({ selectedSession: e.target.value }, () =>
+      setInterval(this.fetchData, 5000)
+    );
   };
 
   render() {

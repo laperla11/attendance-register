@@ -2,10 +2,13 @@
 display:flex;
 flex-direction: column;
 justify-content: center;
+<<<<<<< HEAD
 border:1px solid;
  }
 h2{
 font-size:10x;
+=======
+>>>>>>> 23045523edba015565eed0b44b27fdc11a0a812f
  
 
 }
@@ -36,8 +39,15 @@ font-size:10x;
 
 
 
+<<<<<<< HEAD
 
 p {
+=======
+h2{
+  font-size:20px;
+}
+h6 {
+>>>>>>> 23045523edba015565eed0b44b27fdc11a0a812f
   padding-top:10px;
   position: relative;
   font-family: sans-serif;
@@ -100,7 +110,7 @@ p {
         font-size:10px;
        
       }
-.btn{height:75px;}
+.btn{height:50px;}
   }
 
   
