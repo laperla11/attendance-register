@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import StudentsList from "../Mentor/StudentsList";
 import StudentsAbsents from "../Mentor/StudentsAbsents";
 import "../Mentor/index.css";
+const moment = require("moment");
 
 export class TableRow extends Component {
 constructor(props) {
@@ -69,9 +70,7 @@ return (
 </Fragment>
 );
 }
-}
 
 const divStyle = { width: "100%" };
 
 export default TableRow;
-

@@ -1,23 +1,21 @@
 {
+  "extends": [
+    "prettier"
+  ],
+  "parser": "babel-eslint",
   "env": {
+    "jest": true,
     "browser": true
   },
-  "extends": [
-    "../.eslintrc.json",
-    "plugin:jsx-a11y/strict",
-    "plugin:react/recommended"
-  ],
-  "plugins": [
-    "react-hooks"
-  ],
   "rules": {
-    "react/jsx-tag-spacing": "error",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "error"
+    "prettier": [
+      true
+    ]
   },
-  "settings": {
-    "react": {
-      "version": "16.8"
-    }
+  "plugins": [
+    "prettier"
+  ],
+  "globals": {
+    "window": true
   }
 }
