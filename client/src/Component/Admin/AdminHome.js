@@ -25,7 +25,10 @@ fetch(`api/attendance?date=${this.state.selectedSession}`)
 .then(data => this.setState({ data: data }));
 };
   componentWillMount() {
-    this.setState({ selectedSession: "today" }, () =>
+    this.setState(
+        // { selectedSession: "today" },
+        { selectedSession: "21/07/2019" },
+         () =>
       setInterval(this.fetchData(), 1000)
     );
   }
@@ -132,79 +135,6 @@ handleView={this.selectSession}
 </main>
 );
 }
-=======
-  render() {
-    // const { name, date, city, session } = this.state;
-    // console.log(name, session, city, date);
-    const {
-      name,
-      city,
-      date,
-      session,
-      attendingStudents,
-      totalAttendingStudents,
-      absentStudents,
-      totalAbsentStudents,
-      proportion,
-      sessions
-    } = this.state.data;
-      sessions &&
-      sessions.forEach(session =>
-        session.date= moment(session.date, "DD/MM/YYYY").format("YYYY-MM-DD")
-      );
-// console.log(sessions);
-    return (
-      <main className="row">
-        <div className="md-col-6">
-          <CreateSession
-            name={this.state.name}
-            city={this.state.city}
-            date={this.state.date}
-            session={this.state.session}
-            latitude={this.state.latitude}
-            longitude={this.state.longitude}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-          />
-        </div>
-        <div className="md-col-6">
-          <section style={{ marginLeft: "50px" }}>
-            <h3 className="text-center mb-1">Sessions</h3>
-            <table className="table">
-              <thead className="thead-dark">
-                <tr>
-                  <th scope="col">Date</th>
-                  <th scope="col">Module-Session</th>
-                  <th scope="col">City</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody>               
-                {sessions &&
-                  sessions
-                    .sort((a, b) => {
-                      return new Date(a.date) > new Date(b.date) ? -1 : 1;
-                    })
-                    .map(session => {
-                      return (
-                        <TableRow
-                          session={session}
-                          attendingStudents={attendingStudents}
-                          totalAttendingStudents={totalAttendingStudents}
-                          absentStudents={absentStudents}
-                          totalAbsentStudents={totalAbsentStudents}
-                          proportion={proportion}
-                          handleView={this.selectSession}
-                        />
-                      );
-                    })}
-              </tbody>
-            </table>
-          </section>
-        </div>
-      </main>
-    );
-  }
 }
 
 export default AdminHome;

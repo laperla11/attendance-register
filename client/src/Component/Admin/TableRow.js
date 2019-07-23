@@ -70,7 +70,7 @@ return (
 </Fragment>
 );
 }
-
+}
 const divStyle = { width: "100%" };
 
 export default TableRow;

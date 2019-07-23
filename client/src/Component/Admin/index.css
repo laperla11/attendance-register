@@ -70,7 +70,7 @@ flex-flow: row;
   }
   .table_container{
   text-align: left;
-  background-color: aqua;
+  background-color:aqua;
   }
   .xs-col-12{
   display: flex;
