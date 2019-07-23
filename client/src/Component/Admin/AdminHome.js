@@ -117,7 +117,7 @@ handleSubmit={this.handleSubmit}
 {sessions &&
 sessions.map(session => {
 return (
-<TableRow className="tableRow_wrapper"
+<TableRow className="tableRow_wrapper "
 session={session}
 attendingStudents={attendingStudents}
 totalAttendingStudents={totalAttendingStudents}

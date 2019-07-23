@@ -32,6 +32,7 @@ flex-flow: row;
   margin-left: 10px;
   }
   .createSession{
+    flex:1;
   width: 100%;
   }
   .input{
@@ -41,7 +42,8 @@ flex-flow: row;
   font-size: 18px;
   }
   .newsession{
-  flex: 1;
+  flex: none;
+  width: 50%;
   margin-right: 15px;
   }
   .ml-3{
@@ -62,10 +64,13 @@ flex-flow: row;
   }
   
   .view{
-  width:50%;
+    text-align: left;
+    flex: auto;
+    width: 50%;
   }
   .table_container{
-  display: flex;
+  text-align: left;
+  background-color: aqua;
   }
   .xs-col-12{
   display: flex;
@@ -77,6 +82,9 @@ flex-flow: row;
   .thead{
   display: flex;
   flex-flow: row;
+  }
+  .thead-dark{
+width: auto;
   }
 
   

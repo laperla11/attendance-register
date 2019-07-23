@@ -9,7 +9,7 @@ return (
 </div>
 <form className="form-group ml-3" onSubmit={e => handleSubmit(e)}>
 <div>
-<div className="">
+<div >
 <label for="eFormControlInput1">Date</label>
 <input
 type="text"
