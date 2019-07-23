@@ -1,6 +1,7 @@
 /* eslint-disable arrow-parens */
 import User from "./model/User";
 const dayjs = require("dayjs");
+const Joi = require("joi");
 
 // const bcrypt = require("bcryptjs");
 import bcrypt from "bcryptjs";
@@ -19,7 +20,7 @@ export const registerTest = (req, res, next) => {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
-      status: req.body.status,
+      status: req.body.status
     });
     collection.insertOne(user, (err, result) => {
       res.send(err || result.ops[0]);
@@ -39,7 +40,7 @@ export const loginTest = (req, res, next) => {
     const user = new User({
       email: req.body.email,
       password: req.body.password,
-      status: req.body.status,
+      status: req.body.status
     });
 
     collection.findOne(user, (err, result) => {
@@ -51,7 +52,7 @@ export const loginTest = (req, res, next) => {
 
 export const getUsers = (req, res, next) => {
   const client = getClient();
-  client.connect((err) => {
+  client.connect(err => {
     if (err) {
       return next(err);
     }
@@ -62,11 +63,11 @@ export const getUsers = (req, res, next) => {
     });
     client.close();
   });
-}
+};
 
 export const getSessions = (req, res, next) => {
   const client = getClient();
-  client.connect((err) => {
+  client.connect(err => {
     if (err) {
       return next(err);
     }
@@ -77,7 +78,7 @@ export const getSessions = (req, res, next) => {
     });
     client.close();
   });
-}
+};
 
 export const createSession = (req, res) => {
   const client = getClient();
@@ -93,7 +94,15 @@ export const createSession = (req, res) => {
     const db = client.db("heroku_cs1q5qk5");
     let collection = db.collection("users");
     let studentUsers = [];
-    const newSession = { name, session, date, city, latitude, longitude, attendance: studentUsers };
+    const newSession = {
+      name,
+      session,
+      date,
+      city,
+      latitude,
+      longitude,
+      attendance: studentUsers
+    };
     collection = db.collection("sessions");
     collection.insertOne(newSession, (err, result) => {
       res.send(err || result.ops[0]);
@@ -123,7 +132,7 @@ export const createSession = (req, res) => {
       { date: selectedSessionDate }, // { date : selectedSessionDate}
       { $set: updateObject },
       options,
-      function (error, result) {
+      function(error, result) {
         if (result.value) {
           res.send(error || result.value);
         } else {
@@ -187,7 +196,7 @@ export const getAttendance = (req, res, next) => {
             totalAttendingStudents,
             absentStudents,
             totalAbsentStudents,
-            proportion,
+            proportion
           }
         );
       } else {
@@ -208,11 +217,39 @@ export const register = (req, res, next) => {
       res.status(400).json({ msg: "fill out all the fields" });
       return;
     }
+
+    if (name || email || password) {
+      const schema = Joi.object().keys({
+        name: Joi.string()
+          .min(6)
+          .required(),
+        email: Joi.string()
+          .min(6)
+          .required()
+          .email(),
+        password: Joi.string()
+          .min(6)
+          .required(),
+        status: Joi.string()
+      });
+      Joi.validate(req.body, schema, (err, value) => {
+        if (err) {
+          // send a 422 error response if validation fails
+          res.status(422).json({
+            status: "error",
+            msg:
+              "Looks like there is an issue with your email. Please input a correct email."
+          });
+        }
+      });
+      return;
+    }
+
     const db = client.db("heroku_cs1q5qk5");
     const collection = db.collection("users");
     //check if the email is already in use
     const checkUser = await collection.findOne({
-      email: req.body.email,
+      email: req.body.email
     });
     if (checkUser) {
       res.status(404).json({ msg: "This email is already in use" });
@@ -229,7 +266,7 @@ export const register = (req, res, next) => {
       email: req.body.email,
       //password: hashedPwd,
       password: password,
-      status: req.body.status,
+      status: req.body.status
     });
     collection.insertOne(user, (err, result) => {
       res.send(err || result.ops[0]);
@@ -253,13 +290,13 @@ export const login = (req, res, next) => {
     //check if the user email and password matches
     let collection = db.collection("users");
     let user = await collection.findOne({
-      email: req.body.email,
+      email: req.body.email
     });
-    console.log({ user })
+    console.log({ user });
     //if no matching with the provided email
     if (!user) {
       res.status(404).json({
-        msg: "your email is wrong",
+        msg: "your email is wrong"
       });
       return;
     }
@@ -268,15 +305,15 @@ export const login = (req, res, next) => {
       res.status(400).json({
         msg: `You selected wrong status as ${
           req.body.status
-          }, you should select ${user.status} status!`,
+        }, you should select ${user.status} status!`
       });
       return;
     }
     //checking the password
-    console.log("password", user.password, req.body.password)
+    console.log("password", user.password, req.body.password);
     if (user.password != req.body.password) {
       res.status(400).json({
-        msg: `Your password is wrong!`,
+        msg: `Your password is wrong!`
       });
       return;
     }
@@ -284,11 +321,11 @@ export const login = (req, res, next) => {
     const today = dayjs().format("DD/MM/YYYY");
     collection = db.collection("sessions");
     const sessionToUpdate = await collection.findOne({
-      date: "21/07/2019", //hard coded for testing reality date : today
+      date: "21/07/2019" //hard coded for testing reality date : today
     });
     if (!sessionToUpdate) {
       res.status(404).send({
-        msg: "The session is not created yet! ",
+        msg: "The session is not created yet! "
       });
       return;
     }
@@ -301,7 +338,7 @@ export const login = (req, res, next) => {
       status: user.status,
       city: user.city,
       isAttended: true,
-      timeOfArrival: dayjs().format("HH:mm"),
+      timeOfArrival: dayjs().format("HH:mm")
     };
     sessionToUpdate.attendance.push(user);
     const options = { returnOriginal: false };
@@ -310,8 +347,8 @@ export const login = (req, res, next) => {
       { date: "21/07/2019" }, // { date : today}
       {
         $set: {
-          attendance: sessionToUpdate.attendance,
-        },
+          attendance: sessionToUpdate.attendance
+        }
       },
       options,
       (err, result) => {

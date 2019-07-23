@@ -17,13 +17,15 @@ class AdminHome extends Component {
       session: ""
     };
   }
-fetchData = () => {
-fetch(`api/attendance?date=${this.state.selectedSession}`)
-// fetch("https://jsonplaceholder.typicode.com/users")
-// fetch("api/attendance")
-.then(data => data.json())
-.then(data => this.setState({ data: data }));
-};
+
+  fetchData = () => {
+    fetch(`api/attendance?date=${this.state.selectedSession}`)
+      // fetch("https://jsonplaceholder.typicode.com/users")
+      // fetch("api/attendance")
+      .then(data => data.json())
+      .then(data => this.setState({ data: data }));
+  };
+
   componentWillMount() {
     this.setState(
         // { selectedSession: "today" },
@@ -40,33 +42,29 @@ fetch(`api/attendance?date=${this.state.selectedSession}`)
     this.setState({ selectedSession: date }, () => this.fetchData());
   };
 
-handleChange = e => {
-const { name, value } = e.target;
-this.setState({
-[name]: value
-});
-};
-handleSubmit = e => {
-e.preventDefault();
-const { name, date, city, session, latitude, longitude } = this.state;
-const reqBody = { name, date, session, city, latitude, longitude };
-const reqParams = {
-headers: { "Content-Type": "application/json; charset=utf-8" },
-method: "POST",
-body: JSON.stringify(reqBody)
-};
-fetch(`/api/createSession`, reqParams).then(res => {
-if (res.status == 200) {
-alert("New session created!");
-} else {
-alert("Session couldn't be created try again");
-}
-});
-};
-handleView = id => {
-console.log("view", id);
-};
-
+  handleChange = e => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value
+    });
+  };
+  handleSubmit = e => {
+    e.preventDefault();
+    const { name, date, city, session, latitude, longitude } = this.state;
+    const reqBody = { name, date, session, city, latitude, longitude };
+    const reqParams = {
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      method: "POST",
+      body: JSON.stringify(reqBody)
+    };
+    fetch(`/api/createSession`, reqParams).then(res => {
+      if (res.status == 200) {
+        alert("New session created!");
+      } else {
+        alert("Session couldn't be created try again");
+      }
+    });
+  };
 render() {
 // const { name, date, city, session } = this.state;
 // console.log(name, session, city, date);

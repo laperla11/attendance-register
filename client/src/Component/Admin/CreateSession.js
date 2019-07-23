@@ -129,5 +129,53 @@ Submit
 </form> */}
 </div>
 );
+      {/* <form
+        className="form-group ml-3"
+        onSubmit={e => handleSubmit(e)}
+        action="/register"
+      >
+        <input
+          type="text"
+          value={date}
+          name="date"
+          placeholder="date"
+          className="input form-control"
+          onChange={e => handleChange(e)}
+        />
+        <br />
+        <input
+          type="text"
+          value={name}
+          name="name"
+          placeholder="name"
+          className="input form-control"
+          onChange={e => handleChange(e)}
+        />
+        <br />
+        <input
+          type="text"
+          value={session}
+          name="session"
+          className="input form-control"
+          placeholder="Session"
+          onChange={e => handleChange(e)}
+        />
+        <br />
+        <input
+          type="text"
+          value={city}
+          name="city"
+          className="input form-control"
+          placeholder="City"
+          onChange={e => handleChange(e)}
+        />
+        <br />
+        <section className="btnSection">
+          <button className="nav-link nav-btn-help media-display-none">
+            Submit
+          </button>
+        </section>
+      </form> */}
+    </div>
+  );
 }
-
