@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 
-import './index.css'
+import './Header.css'
 
 
 function HeaderLogout() {

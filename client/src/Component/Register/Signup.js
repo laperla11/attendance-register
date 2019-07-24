@@ -12,7 +12,7 @@ import {
   FormText,
   FormFeedback
 } from "reactstrap";
-import "./index.css";
+import "./Login.css";
 
 import { withRouter, Browserhistory as history } from "react-router-dom";
 

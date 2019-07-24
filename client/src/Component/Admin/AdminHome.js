@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CreateSession from "./CreateSession";
-import "./index.css";
+import "./Admin.css";
 import TableRow from "./TableRow";
 const dayjs = require("dayjs");
 const moment = require("moment");
