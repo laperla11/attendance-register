@@ -242,7 +242,9 @@
 */
 
 @media (min-width: 1023px) and (max-width: 1280px) {
-  
+  .jumbotron{
+    height:50px;
+  }
      
 .content {
   position: relative;
@@ -328,7 +330,7 @@
 
 @media (min-width: 768px) and (max-width: 1024px) {
      .jumbotron{
-       height:200px;
+       height:100px;
      }  
 .content {
   position: relative;
@@ -414,7 +416,9 @@
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   
-  
+  .jumbo{
+    height:50px;
+  }
   
 }
 

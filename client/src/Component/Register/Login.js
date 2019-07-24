@@ -202,7 +202,7 @@ class login extends Component {
       <Container className="App">
         <h2>Sign In</h2>
         <Form className="form">
-          <Col sm={6}>
+          <Col >
             <FormGroup>
               <Label>email</Label>
               <Input
@@ -227,7 +227,7 @@ class login extends Component {
               {/* <FormText>Your username is most likely your email.</FormText> */}
             </FormGroup>
           </Col>
-          <Col sm={6}>
+          <Col >
             <FormGroup>
               <Label for="examplePassword">Password</Label>
               <Input
