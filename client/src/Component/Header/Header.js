@@ -3,7 +3,7 @@ import { Nav, Navbar, NavItem } from "react-bootstrap";
 import { logout, loggedIn } from '../../Auth';
 
 
-import './index.css'
+import './Header.css'
 
 
 class Header extends Component {

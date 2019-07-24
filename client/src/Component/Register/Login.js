@@ -17,7 +17,7 @@ import {
 
 import { withRouter, Browserhistory as history } from "react-router-dom";
 
-import "./index.css";
+import "./Login.css";
 import { insideCircle, headingDistanceTo } from "geolocation-utils";
 // import Joi from "joi";
 
@@ -202,7 +202,7 @@ class login extends Component {
       <Container className="App">
         <h2>Sign In</h2>
         <Form className="form">
-          <Col>
+          <Col sm={6}>
             <FormGroup>
               <Label>email</Label>
               <Input
@@ -227,7 +227,7 @@ class login extends Component {
               {/* <FormText>Your username is most likely your email.</FormText> */}
             </FormGroup>
           </Col>
-          <Col>
+          <Col sm={6}>
             <FormGroup>
               <Label for="examplePassword">Password</Label>
               <Input
@@ -247,7 +247,7 @@ class login extends Component {
               className="btn student"
               value="STUDENT"
             >
-              Login as Student
+              Student
             </Button>
             <Button
               onClick={e => this.handleSubmit(e)}
@@ -255,7 +255,7 @@ class login extends Component {
               className="btn mentor"
               value="MENTOR"
             >
-              Login as Mentor
+              Mentor
             </Button>
             <Button
               onClick={e => this.handleSubmit(e)}
@@ -263,7 +263,7 @@ class login extends Component {
               className="btn admin"
               value="ADMIN"
             >
-              Login as Admin
+              Admin
             </Button>
           </div>
           <h5 className="position">

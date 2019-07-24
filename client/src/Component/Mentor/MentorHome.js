@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import StudentsList from "./StudentsList";
 import StudentsAbsents from "./StudentsAbsents";
 import FakeUsers from "../../fakeData.json";
-import "./index.css";
+import "./Mentor.css";
 import dayjs from "dayjs";
 
 class MentorHome extends Component {
