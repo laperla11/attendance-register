@@ -69,7 +69,7 @@ export class TableRow extends Component {
     );
   }
 }
-
+}
 const divStyle = { width: "100%" };
 
 export default TableRow;
