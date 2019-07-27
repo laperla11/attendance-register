@@ -1,52 +1,112 @@
 
-* {
-  box-sizing: border-box;
-}
-.App {
-  text-align: left;
+@import url('https://fonts.googleapis.com/css?family=Numans');
 
-  border: 2px solid #d3d3d3;
-  border-radius: .5em;
- height:350px;
-  margin-left: auto;
-  margin-right: auto;
-
-  margin-top: 10px;
+html,body{
+background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+font-family: 'Numans', sans-serif;
 }
 
+.container{
+height: 100%;
+align-content: center;
+}
 
+.card{
+height: 370px;
+margin-top: auto;
+margin-bottom: auto;
+width: 400px;
+background-color:#34495e !important;
+}
 
+.social_icon span{
+font-size: 60px;
+margin-left: 10px;
+color: #FFC312;
+}
 
-.button-group {
-  display: flex;
-  justify-content:space-around;
- 
+.social_icon span:hover{
+color: white;
+cursor: pointer;
+}
 
+.card-header h3{
+color: white;
+}
+
+.social_icon{
+position: absolute;
+right: 20px;
+top: -45px;
+}
+::placeholder{
+  color:black;
+}
+.input-group-prepend span{
+width: 50px;
+background-color: #FFC312;
+color: black;
+border:0 !important;
+}
+
+input:focus{
+outline: 0 0 0 0  !important;
+box-shadow: 0 0 0 0 !important;
 
 }
 
+.remember{
+color: white;
 
-h2{
-  font-size:20px;
 }
 
+.remember input
+{
+width: 20px;
+height: 20px;
+margin-left: 15px;
+margin-right: 5px;
+}
 
+.login_btn{
+color: black;
+background-color: #FFC312;
+width: 100px;
+margin-right:15px; ;
+}
+
+.login_btn:hover{
+color: black;
+background-color: white;
+}
+
+.links{
+color: white;
+}
+
+.links a{
+margin-left: 4px;
+}
 
 
 h5 {
   padding-top:10px;
+ 
   position: relative;
   font-family: sans-serif;
   text-transform: uppercase;
   font-size: 1em;
   letter-spacing: 4px;
   overflow: hidden;
-  background: linear-gradient(90deg, #000, #000);
+  background: linear-gradient(90deg,#000, #000);
   background-repeat: no-repeat;
   background-size: 80%;
   animation: animate 20s linear infinite;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: rgba(15, 14, 14, 0);
+  -webkit-text-fill-color: rgba(206, 168, 65, 0);
 }
 
 @keyframes animate {
@@ -57,190 +117,6 @@ h5 {
     background-position: 500%;
   }
 }
-/* 
-  ##Device = Desktops
-  ##Screen = 1281px to higher resolution desktops
-*/
-
-@media (min-width: 1280px) {
-  .App {
-    text-align: left;
-  
-    border: 2px solid #d3d3d3;
-    border-radius: .5em;
-   height:550px;
-    margin-left: auto;
-    margin-right: auto;
-  
-    margin-top: 100px;
-  }
-
- 
-  
-  
+.card-footer{
+  height:200px;
 }
-
-/* 
-  ##Device = Laptops, Desktops
-  ##Screen = B/w 1025px to 1280px
-*/
-
-@media (min-width: 1025px) and (max-width: 1280px) {
-  .App {
-    text-align: left;
-  
-    border: 2px solid #d3d3d3;
-    border-radius: .5em;
-   height:450px;
-    margin-left: auto;
-    margin-right: auto;
-  
-    margin-top: 40px;
-  }
-
-  .button-group{
-    display:flex;
-   
-  
-    justify-content: center;
-    
-}
-label{
-  font-size:20px;
-}
-h2{
-  font-size:15px;
-}
-.button-group Button{
-  margin-left:25px;
-}}
-
-/* 
-  ##Device = Tablets, Ipads (portrait)
-  ##Screen = B/w 768px to 1024px
-*/
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  
-  .App {
-    text-align: left;
-  
-    border: 2px solid #d3d3d3;
-    border-radius: .5em;
-   height:550px;
-    margin-left: auto;
-    margin-right: auto;
-  
-    margin-top: 150px;
-  }
-  
-  
-  
-  
-  .button-group {
-    display: flex;
- justify-content: flex-start;
-   
-  
-  
-  }
-  .button-group Button{
-    margin-right:10px;
-  }
-  
-  h2{
-    font-size:40px;
-  }
-  
-  
-  
-  
-  h5 {
-    padding-top:10px;
-    position: relative;
-    font-family: sans-serif;
-    text-transform: uppercase;
-    font-size: 2em;
-    letter-spacing: 4px;
-    overflow: hidden;
-    background: linear-gradient(90deg, #000, #000);
-    background-repeat: no-repeat;
-    background-size: 80%;
-    animation: animate 20s linear infinite;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: rgba(15, 14, 14, 0);
-  }
-  
-}
-label{
-  font-size:30px;
-
-}
-
-/* 
-  ##Device = Tablets, Ipads (landscape)
-  ##Screen = B/w 768px to 1024px
-*/
-
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-
-  
-  
-}
-
-/* 
-  ##Device = Low Resolution Tablets, Mobiles (Landscape)
-  ##Screen = B/w 481px to 767px
-*/
-
-@media (min-width: 481px) and (max-width: 767px) {
-  
-  
-  
-}
-
-@media(min-width:350px)and (max-width:525px){
-  p{
-    font-size:20px;
-    
-  }
-  h5{
-    font-size:20px;
-  }
-  .App {
-    text-align: left;
-  
-    border: 2px solid #d3d3d3;
-    border-radius: .5em;
-   height:550px;
-    margin-left: auto;
-    margin-right: auto;
-  
-    margin-top: 30px;
-  }
-  
-}
-/* 
-  ##Device = Most of the Smartphones Mobiles (Portrait)
-  ##Screen = B/w 320px to 479px
-*/
-
-@media (min-width: 320px) and (max-width: 480px) {
-  
-  
-  
-}
-/* @media(min-width:800) and (max-width:1444){
-  .App {
-    text-align: left;
-  
-    border: 2px solid #d3d3d3;
-    border-radius: .5em;
-   height:550px;
-    margin-left: auto;
-    margin-right: auto;
-  
-    margin-top: 200px;
-  }
-  
-} */
