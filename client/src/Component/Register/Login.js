@@ -278,7 +278,7 @@ onChange={e => this.handleChange(e)}/>
             </div>
             <div className="card-footer">
               <div className="d-flex justify-content-center links">
-              <h5 classNameName="position">
+              <h5 className="position">
             Your Position : <br />
             <span>Lat : {position.latitude}</span>
             <br />

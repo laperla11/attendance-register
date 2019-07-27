@@ -1,8 +1,9 @@
 /* eslint-disable arrow-parens */
 import React, { Component, Fragment } from "react";
-const dayjs = require("dayjs");
-import bcrypt from "bcryptjs";
-import { setToken, checkRole } from "../../Auth/index";
+import { validateAll } from "indicative/validator";
+import { withRouter, Browserhistory as history } from "react-router-dom";
+import "./index.css";
+
 import {
   Container,
   Col,
@@ -15,57 +16,24 @@ import {
   FormFeedback
 } from "reactstrap";
 
-import { withRouter, Browserhistory as history } from "react-router-dom";
 
-import "./index.css";
-import { insideCircle, headingDistanceTo } from "geolocation-utils";
 // import Joi from "joi";
 
-// //Hashed password
-// const salt = await bcrypt.genSalt(10);
-// const hashedPwd = await bcrypt.hash(password, salt);
-
-class login extends Component {
+class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: "",
       email: "",
       password: "",
       status: "",
       validate: {
         emailState: ""
-      },
-      position: "",
-      currentSession: "",
-      isPositionConfirmed: "notChecked"
+      }
     };
   }
-  componentWillMount() {
-    this.getLocation();
-    this.getSessionLocation();
-    if (checkRole() === "STUDENT") {
-      this.props.history.push("/studentRegistered");
-    }
-    if (checkRole() === "MENTOR") {
-      this.props.history.push("/mentorHome");
-    }
-    if (checkRole() === "ADMIN") {
-      this.props.history.push("/adminHome");
-    }
-  }
-  getSessionLocation = () => {
-    fetch(`api/sessions`)
-      .then(res => res.json())
-      .then(sessions => {
-        // const session = sessions.filter(session=>session.date=dayjs().format("DD/MM/YYYY")).reduce(session=>session)
-        const session = sessions
-          .filter(session => session.date == "28/07/2019") //hard coded for testing
-          .reduce(session => session);
-        console.log(session.longitude);
-        this.setState({ currentSession: session });
-      });
-  };
-  handleChange = async e => {
+
+  handleInputChange = e => {
     const { name, value } = e.target;
     this.setState({
       [name]: value
@@ -74,59 +42,34 @@ class login extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    const { email, password, position } = this.state;
-    const status = e.target.value;
-    this.setState({ status: status });
-    let isPositionConfirmed = await this.confirmLocation(
-      position.latitude,
-      position.longitude
-    );
-    // console.log(!isPositionConfirmed && status.toLowerCase() == "student");
-    if (!isPositionConfirmed && status.toLowerCase() == "student") {
-      return this.props.history.replace("/");
-    } else {
-      // fetch("http://localhost:3000/api/loginJoanTest", {
-      // });
-      try {
-        const res = await fetch("api/login", {
-          method: "PUT",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            email: email,
-            password: password,
-            status: status
-          })
-        });
-        const json = await res.json();
-        if (res.status !== 200) {
-          alert(json.msg);
-        } else {
-          if (status.toUpperCase() === "STUDENT") {
-            setToken(
-              "eyJfaWQiOiJsamhpcmZnaXloNGl2dWkzazRndW9nYmRvdWhyIiwibGFzdE5hbWUiOiJNb3JhZGkiLCJlbWFpbCI6Im1vaHNlbkBjb2RleW91cmZ1dHVyZS5pbyIsImNpdHkiOiJMb25kb24iLCJhdmF0YXIiOiJodHRwczovL2F2YXRhcnMzLmdpdGh1YnVzZXJjb250ZW50LmNvbS91LzMwMzg5ODk2P3Y9NCIsImlhdCI6MTU2MzgwNjgxNn0"
-            );
-            localStorage.setItem("role", "STUDENT");
-            return this.props.history.push("/studentRegistered");
-          } else if (status.toUpperCase() === "MENTOR") {
-            setToken(
-              "eyJfaWQiOiJsamhpcmZnaXloNGl2dWkzazRndW9nYmRvdWhyIiwibGFzdE5hbWUiOiJNb3JhZGkiLCJlbWFpbCI6Im1vaHNlbkBjb2RleW91cmZ1dHVyZS5pbyIsImNpdHkiOiJMb25kb24iLCJhdmF0YXIiOiJodHRwczovL2F2YXRhcnMzLmdpdGh1YnVzZXJjb250ZW50LmNvbS91LzMwMzg5ODk2P3Y9NCIsImlhdCI6MTU2MzgwNjgxNn0"
-            );
-            localStorage.setItem("role", "MENTOR");
-            return this.props.history.push("/mentorHome");
-          } else if (status.toUpperCase() === "ADMIN") {
-            setToken(
-              "eyJfaWQiOiJsamhpcmZnaXloNGl2dWkzazRndW9nYmRvdWhyIiwibGFzdE5hbWUiOiJNb3JhZGkiLCJlbWFpbCI6Im1vaHNlbkBjb2RleW91cmZ1dHVyZS5pbyIsImNpdHkiOiJMb25kb24iLCJhdmF0YXIiOiJodHRwczovL2F2YXRhcnMzLmdpdGh1YnVzZXJjb250ZW50LmNvbS91LzMwMzg5ODk2P3Y9NCIsImlhdCI6MTU2MzgwNjgxNn0"
-            );
-            localStorage.setItem("role", "ADMIN");
-            return this.props.history.push("/adminHome");
-          }
-        }
-      } catch (err) {
-        console.log(err);
+    const { name, email, password } = this.state;
+    console.log(this.state);
+    const data = this.state;
+
+    try {
+      const res = await fetch("api/register", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          password: password,
+          // confirmPassword,
+          status: e.target.value
+        })
+      });
+
+      const json = await res.json();
+      if (res.status !== 200) {
+        alert(json.msg);
+      } else {
+        this.props.history.push("/thankYou");
       }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -137,75 +80,6 @@ class login extends Component {
   //     password: Joi.string().min(6).required(),
   //   };
   // }
-  getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          this.setState({ position: position.coords });
-        },
-        error => {
-          switch (error.code) {
-            case error.PERMISSION_DENIED:
-              alert(
-                "You denied the request for Geolocation, allow me to access your location in order to login to the class."
-              );
-              break;
-            case error.POSITION_UNAVAILABLE:
-              alert("Location information is unavailable.");
-              break;
-            case error.TIMEOUT:
-              alert("The request to get user location timed out.");
-              break;
-            case error.UNKNOWN_ERROR:
-              alert("An unknown error occurred.");
-              break;
-          }
-        }
-      );
-    }
-  };
-
-  confirmLocation = async (poslat, poslong) => {
-    const positionOfCYFOffice = {
-      lat: 51.53,
-      lon: -0.05
-    };
-    const positionOfticketMaster = {
-      lat: 51.53,
-      lon: -0.1
-    };
-    const myHome = {
-      lat: 51.52,
-      lon: -0.36
-    };
-    const { latitude, longitude } = this.state.currentSession;
-    const center = {
-      lat: Number(latitude),
-      lon: Number(longitude)
-    };
-    console.log({ center });
-    console.log("my location", poslat, poslong);
-    // to calculate the distance to the target
-    console.log(
-      headingDistanceTo(center, {
-        lat: poslat,
-        lon: poslong
-      })
-    );
-    const radius = 10000; // meters
-    const result = insideCircle(
-      {
-        lat: poslat,
-        lon: poslong
-      },
-      center,
-      radius
-    );
-    this.setState({
-      isPositionConfirmed: result
-    });
-    return result;
-  };
 
   validateEmail(e) {
     const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -219,25 +93,34 @@ class login extends Component {
   }
 
   render() {
-    const {
-      email,
-      password,
-      status,
-      position,
-      isPositionConfirmed
-    } = this.state;
-    console.log({ isPositionConfirmed });
+    const { name, email, password } = this.state;
     return (
       // <Container className="App">
       <Fragment>
+
         <Form className="form">
-          <h2 className="registerTitle">Sign In</h2>
+          <h2 className="registerTitle">SignUp</h2>
 
           <div className="formGroupBlock">
             <FormGroup className="formGroup">
-              <Label for="exampleEmail" className="labelTag">
-                Email
-              </Label>
+              <Label for="name" className="labelTag">Name</Label>
+              <Input
+                type="text"
+                name="name"
+                placeholder="name"
+                value={name}
+                required
+                onChange={e => {
+                  this.handleInputChange(e);
+                }}
+              />
+              <FormFeedback valid>
+                That's a tasty looking name you've got there.
+              </FormFeedback>
+            </FormGroup>
+
+            <FormGroup className="formGroup">
+              <Label for="email" className="labelTag">email</Label>
               <Input
                 type="email"
                 name="email"
@@ -247,28 +130,29 @@ class login extends Component {
                 valid={this.state.validate.emailState === "has-success"}
                 invalid={this.state.validate.emailState === "has-danger"}
                 onChange={e => {
-                  this.handleChange(e);
+                  this.handleInputChange(e);
                   this.validateEmail(e);
-                  // this.handleChange(e);
+                  this.handleInputChange(e);
                 }}
               />
+
               <FormFeedback>
-                Looks like there is an issue with your email. Please input a
-                correct email.
+                Looks like there is an issue with your email. Please
+                input a correct email.
               </FormFeedback>
+              {/* <FormText>Your username is most likely your email.</FormText> */}
             </FormGroup>
 
+
             <FormGroup className="formGroup">
-              <Label for="examplePassword" className="labelTag">
-                Password
-              </Label>
+              <Label for="Password" className="labelTag">Password</Label>
               <Input
                 type="password"
                 name="password"
-                id="examplePassword"
+                id="Password"
                 placeholder="********"
                 value={password}
-                onChange={e => this.handleChange(e)}
+                onChange={e => this.handleInputChange(e)}
               />
             </FormGroup>
           </div>
@@ -290,35 +174,12 @@ class login extends Component {
             >
               Mentor
             </Button>
-
-            <Button
-              onClick={e => this.handleSubmit(e)}
-              type="submit"
-              className="btn admin"
-              value="ADMIN"
-            >
-              Admin
-            </Button>
           </div>
-          {/* <h5 className="position">
-            Your Position : <br />
-            <span>Lat : {position.latitude}</span>
-            <br />
-            <span>Long : {position.longitude}</span>
-          </h5> */}
-
-          {status.toLowerCase() == "student" &&
-          isPositionConfirmed != "notChecked" &&
-          !isPositionConfirmed ? (
-            <p>Check your location , you are not at the class yet, hurry up!</p>
-          ) : isPositionConfirmed === "confirmed" ? (
-            <p>Your position is confirmed, enjoy the class!</p>
-          ) : null}
         </Form>
-        {/* </Container> */}
       </Fragment>
+
     );
   }
 }
 
-export default withRouter(login);
+export default withRouter(SignUp);

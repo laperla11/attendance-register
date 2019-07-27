@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { validateAll } from "indicative/validator";
+
 
 
 import "./Login.css";
@@ -8,7 +9,7 @@ import { withRouter, Browserhistory as history } from "react-router-dom";
 
 // import Joi from "joi";
 
-class SignUp extends Component {
+class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -69,20 +70,13 @@ class SignUp extends Component {
   //   };
   // }
 
-  validateEmail(e) {
-    const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const { validate } = this.state;
-    if (emailRex.test(e.target.value)) {
-      validate.emailState = "has-success";
-    } else {
-      validate.emailState = "has-danger";
-    }
-    this.setState({ validate });
-  }
-
+  
   render() {
     const { name, email, password } = this.state;
-    return ( <div className="container">
+
+    return (
+      <Fragment>
+      <div className="container">
     <div className="d-flex justify-content-center h-100">
       <div className="card">
         <div className="card-header">
@@ -150,10 +144,10 @@ class SignUp extends Component {
       </div>
     </div>
   </div>
-    
+  </Fragment>
     
     );
   }
 }
 
-export default withRouter(SignUp);
+export default withRouter(Signup);
