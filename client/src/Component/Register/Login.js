@@ -1,5 +1,5 @@
 // Example JS object used for CSS styling
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 const dayjs = require("dayjs");
 import bcrypt from "bcryptjs";
 import { setToken, checkRole } from '../../Auth/index'
@@ -30,7 +30,9 @@ const styles = {
         email: "",
         password: "",
         status: "",
-       
+        validate: {
+          emailState: ""
+        },
         position: "",
         currentSession: "",
         isPositionConfirmed: "notChecked"
@@ -38,16 +40,7 @@ const styles = {
     }
     componentWillMount() {
       this.getLocation();
-      fetch(`api/sessions`)
-        .then(res => res.json())
-        .then(sessions => {
-          // const session = sessions.filter(session=>session.date=dayjs().format("DD/MM/YYYY")).reduce(session=>session)
-          const session = sessions
-            .filter(session => session.date == "28/07/2019")
-            .reduce(session => session);
-          console.log(session.longitude);
-          this.setState({ currentSession: session });
-        });
+      this.getSessionLocation();
       if (checkRole() === "STUDENT") {
         this.props.history.push("/studentRegistered");
       }
@@ -58,6 +51,18 @@ const styles = {
         this.props.history.push("/adminHome");
       }
     }
+    getSessionLocation = () => {
+      fetch(`api/sessions`)
+        .then(res => res.json())
+        .then(sessions => {
+          // const session = sessions.filter(session=>session.date=dayjs().format("DD/MM/YYYY")).reduce(session=>session)
+          const session = sessions
+            .filter(session => session.date == "28/07/2019") //hard coded for testing
+            .reduce(session => session);
+          console.log(session.longitude);
+          this.setState({ currentSession: session });
+        });
+    };
     handleChange = async e => {
       const { name, value } = e.target;
       this.setState({
@@ -74,9 +79,9 @@ const styles = {
         position.latitude,
         position.longitude
       );
-      console.log(!isPositionConfirmed && status.toLowerCase() == "student");
+      // console.log(!isPositionConfirmed && status.toLowerCase() == "student");
       if (!isPositionConfirmed && status.toLowerCase() == "student") {
-        return this.props.history.replace("/studentRegistered");
+        return this.props.history.replace("/");
       } else {
         // fetch("http://localhost:3000/api/loginJoanTest", {
         // });
@@ -140,7 +145,7 @@ const styles = {
             switch (error.code) {
               case error.PERMISSION_DENIED:
                 alert(
-                  "You denied the request for Geolocation, allow me to access you location in order to login to the className."
+                  "You denied the request for Geolocation, allow me to access your location in order to login to the class."
                 );
                 break;
               case error.POSITION_UNAVAILABLE:
@@ -200,7 +205,16 @@ const styles = {
       return result;
     };
   
- 
+    validateEmail(e) {
+      const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const { validate } = this.state;
+      if (emailRex.test(e.target.value)) {
+        validate.emailState = "has-success";
+      } else {
+        validate.emailState = "has-danger";
+      }
+      this.setState({ validate });
+    }
   
     render() {
         const {
@@ -211,7 +225,10 @@ const styles = {
             isPositionConfirmed
           } = this.state;
       return (
+        <Fragment>
         <div className="container">
+
+
         <div className="d-flex justify-content-center h-100">
           <div className="card">
             <div className="card-header">
@@ -291,7 +308,7 @@ onChange={e => this.handleChange(e)}/>
           </div>
         </div>
       </div>
-        
+      </Fragment>
       )
     }
   }
