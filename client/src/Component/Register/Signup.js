@@ -1,17 +1,7 @@
 import React, { Component } from "react";
 import { validateAll } from "indicative/validator";
 
-import {
-  Container,
-  Col,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Button,
-  FormText,
-  FormFeedback
-} from "reactstrap";
+
 import "./Login.css";
 
 import { withRouter, Browserhistory as history } from "react-router-dom";
@@ -92,34 +82,39 @@ class SignUp extends Component {
 
   render() {
     const { name, email, password } = this.state;
-    return (
-      <Container className="App">
-        <h2>SignUp</h2>
-        <Form className="form">
-          <Col>
-            <FormGroup>
-              <Label>Name</Label>
-              <Input
-                type="text"
+    return ( <div className="container">
+    <div className="d-flex justify-content-center h-100">
+      <div className="card">
+        <div className="card-header">
+          <h3>Sign In</h3>
+     
+        </div>
+        <div className="card-body">
+          <form>
+          <div className="input-group form-group">
+              <div className="input-group-prepend">
+                <span className="input-group-text"><i className="fas fa-user"></i></span>
+              </div>
+             
+              <input  type="text"
                 name="name"
                 placeholder="name"
                 value={name}
                 required
                 onChange={e => {
                   this.handleInputChange(e);
-                }}
-              />
-              <FormFeedback valid>
-                That's a tasty looking name you've got there.
-              </FormFeedback>
-            </FormGroup>
-            <FormGroup>
-              <Label>email</Label>
-              <Input
-                type="email"
+                }}/>
+              
+            </div>
+            <div className="input-group form-group">
+              <div className="input-group-prepend">
+                <span className="input-group-text"><i className="fas fa-user"></i></span>
+              </div>
+             
+              <input  type="email"
                 name="email"
                 id="exampleEmail"
-                placeholder="myemail@email.com"
+                placeholder="Email"
                 value={email}
                 valid={this.state.validate.emailState === "has-success"}
                 invalid={this.state.validate.emailState === "has-danger"}
@@ -127,52 +122,36 @@ class SignUp extends Component {
                   this.handleInputChange(e);
                   this.validateEmail(e);
                   this.handleInputChange(e);
-                }}
-              />
-              <FormFeedback valid>
-                That's a tasty looking email you've got there.
-              </FormFeedback>
-              <FormFeedback>
-                Looks like there is an issue with your email. Please
-                input a correct email.
-              </FormFeedback>
-             
-            </FormGroup>
-          </Col>
-          <Col>
-            <FormGroup>
-              <Label for="Password">Password</Label>
-              <Input
-                type="password"
+                }}/>
+              
+            </div>
+            <div className="input-group form-group">
+              <div className="input-group-prepend">
+                <span className="input-group-text"><i className="fas fa-key"></i></span>
+              </div>
+              <input   type="password"
                 name="password"
                 id="Password"
                 placeholder="********"
                 value={password}
-                onChange={e => this.handleInputChange(e)}
-              />
-            </FormGroup>
-          </Col>
-          <div className="button-group">
-            <Button
-              onClick={e => this.handleSubmit(e)}
-              type="submit"
-              className="btn student"
-              value="STUDENT"
-            >
-              Sign Up as Student
-            </Button>
-
-            <Button
-              onClick={e => this.handleSubmit(e)}
-              type="submit"
-              className="btn mentor"
-              value="MENTOR"
-            >
-              Sign Up as Mentor
-            </Button>
-          </div>
-        </Form>
-      </Container>
+                onChange={e => this.handleInputChange(e)}/>
+            </div>
+            
+            <div className="form-group">
+              <button type="submit"  className="btn float-right login_btn"  value="STUDENT" onClick={e => this.handleSubmit(e)}> Student</button>
+            </div>
+            <div className="form-group">
+              <button type="submit"  className="btn float-right login_btn"  value="MENTOR" onClick={e => this.handleSubmit(e)}>Mentor</button>
+            </div>
+           
+          </form>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+    
+    
     );
   }
 }

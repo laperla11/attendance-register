@@ -3,10 +3,12 @@ import React, {Component} from 'react';
 const dayjs = require("dayjs");
 import bcrypt from "bcryptjs";
 import { setToken, checkRole } from '../../Auth/index'
+import { MDBContainer, MDBAlert } from 'mdbreact';
 
 import { insideCircle, headingDistanceTo } from "geolocation-utils";
 
 import { withRouter, Browserhistory as history } from "react-router-dom";
+
 
 
 import './Login.css'
@@ -267,12 +269,22 @@ onChange={e => this.handleChange(e)}/>
 </h5>
               </div>
               <div className="d-flex justify-content-center">
+  
+
               {status.toLocaleLowerCase() == "student" &&
           isPositionConfirmed != "notChecked" &&
           !isPositionConfirmed ? (
-            <p>Check your location , you are not at the className yet, hurry up!</p>
+            <MDBContainer>
+            <MDBAlert color="warning" dismiss>
+              <strong>Check your location!</strong>you are not at the className yet, hurry up!
+            </MDBAlert>
+            </MDBContainer>
           ) : isPositionConfirmed === "confirmed" ? (
-            <p>Your position is confirmed, enjoy the className!</p>
+            <MDBContainer>
+            <MDBAlert color="warning" dismiss>
+              <strong>your position is confirmed!</strong>Enjoy your class!
+            </MDBAlert>
+            </MDBContainer>
 ) : null}
               </div>
             </div>
