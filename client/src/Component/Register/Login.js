@@ -293,7 +293,7 @@ onChange={e => this.handleChange(e)}/>
           !isPositionConfirmed ? (
             <MDBContainer>
             <MDBAlert color="warning" dismiss>
-              <strong>Check your location!</strong>you are not at the className yet, hurry up!
+              <strong>Check your location!</strong>you are not at the class yet, hurry up!
             </MDBAlert>
             </MDBContainer>
           ) : isPositionConfirmed === "confirmed" ? (
