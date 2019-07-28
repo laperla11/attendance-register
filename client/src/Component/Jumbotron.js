@@ -10,7 +10,7 @@ export class Jumbotron extends Component {
     return (
     
      
-        <Jumbo fluid className="jumbo">
+        <Jumbo fluid className="jumbo ">
           <div className="overlay" />
           <Container>
               <div className="content">
