@@ -1,6 +1,6 @@
 import React from "react";
-import "../Student/index.css"
-​
+import "../Student/index.css";
+
 function ThankYou() {
   return (
     <main className="mainAttendance">
