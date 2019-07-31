@@ -12,5 +12,5 @@ function ThankYou() {
     </main>
   );
 }
-​
+
 export default ThankYou;
