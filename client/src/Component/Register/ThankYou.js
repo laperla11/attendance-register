@@ -6,7 +6,7 @@ function ThankYou() {
     <main className="mainAttendance">
       <h1>Thank you for Signing in, </h1>
       <div className="attendance">
-        {console.log("hello")}
+        {/* {console.log("hello")} */}
         <h2>Welcome to the CodeYourFuture Community</h2>
       </div>
     </main>
