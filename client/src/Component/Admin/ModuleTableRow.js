@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
-const moment = require("moment");
-import "./index.css"
+import "./index.css";
 
 export class ModuleTableRow extends Component {
   constructor(props) {
@@ -14,7 +13,6 @@ export class ModuleTableRow extends Component {
   };
 
   render() {
-    // console.log(this.props.module);
     const { name, attendance, absence, attendanceRate } = this.props.modul;
     const { id } = this.props;
     return (
@@ -50,7 +48,5 @@ export class ModuleTableRow extends Component {
     );
   }
 }
-
-const divStyle = { width: "100%" };
 
 export default ModuleTableRow;

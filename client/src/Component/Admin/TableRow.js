@@ -1,8 +1,5 @@
 import React, { Component, Fragment } from "react";
-import StudentsList from "../Mentor/StudentsList";
-import StudentsAbsents from "../Mentor/StudentsAbsents";
 import "../Mentor/index.css";
-const moment = require("moment");
 
 export class TableRow extends Component {
   constructor(props) {
@@ -31,7 +28,7 @@ export class TableRow extends Component {
     return (
       <Fragment>
         <tr key={_id} className="nav-tr-info">
-          <td>{moment(date, "YYYY-MM-DD").format("DD/MM/YYYY")}</td>
+          <td>{date}</td>
           <td>
             {name} - {session}
           </td>
@@ -54,9 +51,15 @@ export class TableRow extends Component {
               <p>Total : {totalAttendingStudents}</p>
               <p>Percentage : {attendanceRate} %</p>
               <p>
-                {attendingStudents.map(student => (
-                  <p key={student._id}>{student.name} ({student.timeOfArrival})</p>
-                ))}
+                {attendingStudents
+                  .sort((a, b) => {
+                    return a.timeOfArrival.localeCompare(b.timeOfArrival);
+                  })
+                  .map(student => (
+                    <p key={student._id}>
+                      {student.name} ({student.timeOfArrival})
+                    </p>
+                  ))}
               </p>
             </td>
             <td colspan="2" className="absenceCell">

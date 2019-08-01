@@ -1,12 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import "./index.css"
+import "./index.css";
 
 function StudentsList(props) {
-  console.log(props.students.sort((a,b)=>{
-    return a.timeOfArrival.localeCompare(b.timeOfArrival)
-  }));
-  
   return (
     <div>
       <table className="blueTable">
@@ -17,12 +13,17 @@ function StudentsList(props) {
           </tr>
         </thead>
         <tbody>
-          {props.students && props.students.map(student => (
-            <tr key={student.id}>
-              <td> {student.name} </td>
-              <td> {student.timeOfArrival} </td>
-            </tr>
-          ))}
+          {props.students &&
+            props.students
+              .sort((a, b) => {
+                return a.timeOfArrival.localeCompare(b.timeOfArrival);
+              })
+              .map(student => (
+                <tr key={student.id}>
+                  <td> {student.name} </td>
+                  <td> {student.timeOfArrival} </td>
+                </tr>
+              ))}
           {/* {props.students.map(student => (
             <tr key={student.id}>
               <td> {student.name} </td>
@@ -30,7 +31,7 @@ function StudentsList(props) {
             </tr>
           ))} */}
           <tr className="total">
-            <td colspan="2">Total :  {props.total} </td>
+            <td colspan="2">Total : {props.total} </td>
           </tr>
         </tbody>
       </table>
@@ -38,6 +39,6 @@ function StudentsList(props) {
   );
 }
 
-const divStyle = { "width": "400px" }
+const divStyle = { width: "400px" };
 
 export default StudentsList;

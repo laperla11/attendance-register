@@ -14,7 +14,7 @@ export default function CreateSession(props) {
               type="text"
               value={date}
               name="date"
-              placeholder="DD/MM/YYYY"
+              placeholder="YYYY-MM-DD"
               className="input form-control"
               onChange={e => handleChange(e)}
             />

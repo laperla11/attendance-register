@@ -22,8 +22,6 @@ import {
 } from "reactstrap";
 import classnames from "classnames";
 import ModuleTableRow from "./ModuleTableRow";
-const dayjs = require("dayjs");
-const moment = require("moment");
 
 class AdminHome extends Component {
   constructor(props) {
@@ -33,8 +31,6 @@ class AdminHome extends Component {
       name: "",
       date: "",
       city: "",
-      latitude: "",
-      longitude: "",
       session: "",
       isStudentViewDisplayed: false,
       activeTab: "1"
@@ -56,8 +52,8 @@ class AdminHome extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { name, date, city, session, latitude, longitude } = this.state;
-    const reqBody = { name, date, session, city, latitude, longitude };
+    const { name, date, city, session } = this.state;
+    const reqBody = { name, date, session, city };
     const reqParams = {
       headers: { "Content-Type": "application/json; charset=utf-8" },
       method: "POST",
@@ -83,16 +79,12 @@ class AdminHome extends Component {
 
   render() {
     const { students, sessions, modules } = this.state.data;
-    sessions &&
-      sessions.forEach(
-        session =>
-          (session.date = moment(session.date, "DD/MM/YYYY").format(
-            "YYYY-MM-DD"
-          ))
-      );
     return (
       <Fragment>
-        <h1><span className="appName">Regi</span><span className="appNameBack">Swift</span></h1>
+        <h1>
+          <span className="appName">Regi</span>
+          <span className="appNameBack">Swift</span>
+        </h1>
         <main className="mainAdmin">
           <div className="mainAdmin-row">
             <h3>CodeYourFuture's Students</h3>
@@ -123,7 +115,7 @@ class AdminHome extends Component {
             </Table>
             {students &&
               students.sort((a, b) => {
-                return (a.name).toLowerCase() > (b.name).toLowerCase() ? 1 : -1
+                return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
               }) && <BarChart2 students={students} />}
           </div>
           <div className="mainAdmin-row sessionBox">
@@ -139,7 +131,7 @@ class AdminHome extends Component {
                   }}
                 >
                   Sessions
-              </NavLink>
+                </NavLink>
               </NavItem>
 
               <NavItem className="navItem">
@@ -153,7 +145,7 @@ class AdminHome extends Component {
                   }}
                 >
                   New Session
-              </NavLink>
+                </NavLink>
               </NavItem>
               <NavItem className="navItem">
                 <NavLink
@@ -166,7 +158,7 @@ class AdminHome extends Component {
                   }}
                 >
                   Modules
-              </NavLink>
+                </NavLink>
               </NavItem>
             </Nav>
 
@@ -217,8 +209,6 @@ class AdminHome extends Component {
                           city={this.state.city}
                           date={this.state.date}
                           session={this.state.session}
-                          latitude={this.state.latitude}
-                          longitude={this.state.longitude}
                           handleChange={this.handleChange}
                           handleSubmit={this.handleSubmit}
                         />

@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import StudentsList from "./StudentsList";
 import StudentsAbsents from "./StudentsAbsents";
-import FakeUsers from "../../fakeData.json";
 import "./index.css";
 import dayjs from "dayjs";
-import moment from "moment";
 
 class MentorHome extends Component {
   constructor(props) {
@@ -18,8 +16,7 @@ class MentorHome extends Component {
   }
 
   componentWillMount() {
-    //TODO : if there is no result do not start timer
-    this.startTimer = setInterval(this.fetchData, 1000);
+    this.fetchData();
   }
 
   fetchData = async () => {
@@ -29,19 +26,8 @@ class MentorHome extends Component {
   };
 
   selectSession = e => {
-    //if it is not today clear interval and fetch for selected date
-    //if it is today start timer with today
-    const selectedSessionDate = moment(e.target.value, "YYYY-MM-DD").format(
-      "DD/MM/YYYY"
-    );
-    if (selectedSessionDate !== this.state.today) {
-      clearInterval(this.startTimer);
-      this.setState({ selectedSessionDate }, () =>
-        this.fetchData(this.state.selectedSessionDate)
-      );
-    } else {
-      this.setState({ selectedSessionDate }, () => this.startTimer);
-    }
+    const selectedSessionDate = e.target.value;
+    this.setState({ selectedSessionDate }, () => this.fetchData());
   };
 
   render() {
@@ -56,18 +42,14 @@ class MentorHome extends Component {
       totalAbsentStudents,
       proportion
     } = this.state.data;
-    const today = moment().format("DD/MM/YYYY");
-    sessions &&
-      sessions.forEach(
-        session =>
-          (session.date = moment(session.date, "DD/MM/YYYY").format(
-            "YYYY-MM-DD"
-          ))
-      );
+    const today = dayjs().format("YYYY-MM-DD");
     return (
       <main className="main">
         <section className="register_Info">
-          <h1><span className="appName">Regi</span><span className="appNameBack">Swift</span></h1>
+          <h1>
+            <span className="appName">Regi</span>
+            <span className="appNameBack">Swift</span>
+          </h1>
           <p>Today : {today}</p>
           {session ? (
             <p>
@@ -79,10 +61,7 @@ class MentorHome extends Component {
             Choose a session date{" "}
             <select
               onChange={this.selectSession}
-              value={moment(
-                this.state.selectedSessionDate,
-                "DD/MM/YYYY"
-              ).format("YYYY-MM-DD")}
+              value={this.state.selectedSessionDate}
               name="session"
             >
               <option value={today}>Today</option>}
@@ -124,8 +103,10 @@ class MentorHome extends Component {
             </p>
           </div>
         ) : (
-            <p className="extra-text">There is no results for today, please select another date !</p>
-          )}
+          <p className="extra-text">
+            There is no results for today, please select another date !
+          </p>
+        )}
       </main>
     );
   }
