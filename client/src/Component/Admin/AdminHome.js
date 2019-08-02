@@ -38,7 +38,7 @@ class AdminHome extends Component {
   }
 
   componentWillMount() {
-    fetch(`api/personalAttendance`)
+    fetch(`api/attendance`)
       .then(data => data.json())
       .then(data => this.setState({ data: data }));
   }

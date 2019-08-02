@@ -85,8 +85,6 @@ class login extends Component {
     if (!isPositionConfirmed && status.toLowerCase() == "student") {
       return this.props.history.replace("/");
     } else {
-      // fetch("http://localhost:3000/api/loginJoanTest", {
-      // });
       try {
         const res = await fetch("api/login", {
           method: "PUT",
@@ -100,8 +98,8 @@ class login extends Component {
             status: status
           })
         });
-        const json = await res.json();
         if (res.status !== 200) {
+          const json = await res.json();
           alert(json.msg);
         } else {
           if (status.toUpperCase() === "STUDENT") {
@@ -226,10 +224,12 @@ class login extends Component {
         <Form className="form">
           <div className="appNameBox">
             {/* <img src={} /> */}
-            <h2><span className="appName">Regi</span><span className="appNameBack">Swift</span></h2>
+            <h2>
+              <span className="appName">Regi</span>
+              <span className="appNameBack">Swift</span>
+            </h2>
             <h2 className="registerTitle">Sign In</h2>
           </div>
-
 
           <div className="formGroupBlock">
             <FormGroup className="formGroup">
@@ -306,12 +306,12 @@ class login extends Component {
           </h5> */}
 
           {status.toLowerCase() == "student" &&
-            isPositionConfirmed != "notChecked" &&
-            !isPositionConfirmed ? (
-              <p>Check your location , you are not at the class yet, hurry up!</p>
-            ) : isPositionConfirmed === "confirmed" ? (
-              <p>Your position is confirmed, enjoy the class!</p>
-            ) : null}
+          isPositionConfirmed != "notChecked" &&
+          !isPositionConfirmed ? (
+            <p>Check your location , you are not at the class yet, hurry up!</p>
+          ) : isPositionConfirmed === "confirmed" ? (
+            <p>Your position is confirmed, enjoy the class!</p>
+          ) : null}
         </Form>
         {/* </Container> */}
       </Fragment>

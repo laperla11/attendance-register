@@ -11,48 +11,6 @@ import bcrypt from "bcryptjs";
 
 import { getClient } from "./db";
 
-export const registerTest = (req, res, next) => {
-  const client = getClient();
-  client.connect(err => {
-    if (err) {
-      return next(err);
-    }
-    const db = client.db("heroku_cs1q5qk5");
-    const collection = db.collection("users");
-    const user = new User({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-      status: req.body.status
-    });
-    collection.insertOne(user, (err, result) => {
-      res.send(err || result.ops[0]);
-    });
-    client.close();
-  });
-};
-
-export const loginTest = (req, res, next) => {
-  const client = getClient();
-  client.connect(err => {
-    if (err) {
-      return next(err);
-    }
-    const db = client.db("heroku_cs1q5qk5");
-    const collection = db.collection("users");
-    const user = new User({
-      email: req.body.email,
-      password: req.body.password,
-      status: req.body.status
-    });
-
-    collection.findOne(user, (err, result) => {
-      res.send(err || result.ops[0]);
-    });
-    client.close();
-  });
-};
-
 export const getUsers = (req, res, next) => {
   const client = getClient();
   client.connect(err => {
@@ -68,7 +26,7 @@ export const getUsers = (req, res, next) => {
   });
 };
 
-export const getPersonalAttendance = (req, res, next) => {
+export const getAttendance = (req, res, next) => {
   const client = getClient();
   client.connect(async err => {
     if (err) {
@@ -187,7 +145,7 @@ export const createSession = (req, res) => {
     }
     const db = client.db("heroku_cs1q5qk5");
     let collection = db.collection("users");
-    let studentUsers = [];
+    // let studentUsers = [];
     const newSession = {
       name,
       number,
@@ -195,7 +153,7 @@ export const createSession = (req, res) => {
       city,
       latitude: latitude ? latitude : "51.53",
       longitude: longitude ? longitude : "-0.107",
-      attendance: studentUsers
+      attendance: []
     };
     collection = db.collection("sessions");
     collection.insertOne(newSession, (err, result) => {
@@ -205,21 +163,24 @@ export const createSession = (req, res) => {
   });
 };
 
-(req, res) => {
+export const updateSession = (req, res) => {
   const client = getClient();
   const selectedSessionDate = req.query.date;
   client.connect(async err => {
     if (err) {
       return next(err);
     }
-    let { name, number, date, city } = req.body;
+    let { name, session, date, city, latitude, longitude } = req.body;
     const updateObject = {};
     name ? (updateObject.name = name) : null;
     city ? (updateObject.city = city) : null;
-    number ? (updateObject.number = number) : null;
+    session ? (updateObject.session = session) : null;
     date ? (updateObject.date = date) : null;
-    // console.log(updateObject);
+    latitude ? (updateObject.latitude = latitude) : null;
+    longitude ? (updateObject.longitude = longitude) : null;
+
     const db = client.db("heroku_cs1q5qk5");
+
     let collection = db.collection("sessions");
     const options = { returnOriginal: false };
     collection.findOneAndUpdate(
@@ -236,67 +197,6 @@ export const createSession = (req, res) => {
       }
     );
     client.close();
-  });
-};
-
-export const getAttendance = (req, res, next) => {
-  const client = getClient();
-  client.connect(async err => {
-    if (err) {
-      return next(err);
-    }
-    const db = client.db("heroku_cs1q5qk5");
-    let collection = db.collection("users");
-    let students = await collection.find().toArray();
-    students = students.filter(
-      student => student.status.toLowerCase() == "student"
-    );
-    collection = db.collection("sessions");
-    collection.find().toArray((err, sessions) => {
-      const today = dayjs().format("DD/MM/YYYY");
-      const selectedDate = req.query.date === "today" ? today : req.query.date;
-      let currentSession = sessions.filter(
-        session => session.date === selectedDate
-      ); //should be for real life
-      if (currentSession.length > 0) {
-        currentSession = currentSession.reduce(session => session);
-        const { name, session, date } = currentSession;
-        const attendingStudents = currentSession.attendance.filter(
-          user =>
-            user.status.toLowerCase() === "student" && user.isAttended === true
-        );
-        const totalAttendingStudents = attendingStudents.length;
-        const attendantStudentsEmails = attendingStudents.map(
-          attendant => attendant.email
-        );
-        let absentStudents = [];
-        students.forEach(student => {
-          if (!attendantStudentsEmails.includes(student.email)) {
-            absentStudents.push(student);
-          }
-        });
-        const totalAbsentStudents = absentStudents.length;
-        const proportion = (
-          (totalAttendingStudents * 100) /
-          (totalAttendingStudents + totalAbsentStudents)
-        ).toFixed(2);
-        res.send(
-          err || {
-            sessions,
-            name,
-            session,
-            date,
-            attendingStudents,
-            totalAttendingStudents,
-            absentStudents,
-            totalAbsentStudents,
-            proportion
-          }
-        );
-      } else {
-        res.send(err || { sessions });
-      }
-    });
   });
 };
 
@@ -381,7 +281,6 @@ export const login = (req, res, next) => {
     let user = await collection.findOne({
       email: email
     });
-    // console.log({ user });
     //if no matching with the provided email
     if (!user) {
       res.status(404).json({
@@ -406,63 +305,68 @@ export const login = (req, res, next) => {
       return;
     }
     //if the password is correct
+
     const today = dayjs().format("YYYY-MM-DD");
     const selectedDate = req.query.date ? req.query.date : today;
-    collection = db.collection("sessions");
-    const sessionToUpdate = await collection.findOne({
-      date: "2019-07-31" //hard coded for testing reality date : selectedDate
-    });
-    if (!sessionToUpdate && status.toLowerCase() == "student") {
-      res.status(404).send({
-        msg: "The session is not created yet! "
+    if (user.status.toLowerCase() === "student") {
+      console.log("student");
+      collection = db.collection("sessions");
+      const sessionToUpdate = await collection.findOne({
+        date: selectedDate //"2019-07-31" //hard coded for testing reality date : selectedDate
       });
-      return;
-    }
-    //if user is check if he is already registered or not by email
-    if (
-      user.status.toLowerCase() == "student" &&
-      sessionToUpdate.attendance
-        .map(student => {
-          return student.email;
-        })
-        .includes(user.email)
-    ) {
-      res.status(404).send({
-        msg: "You are alredy logged in to the class! "
-      });
-      return;
-    }
-
-    user = {
-      userId: user._id,
-      name: user.name,
-      email: user.email,
-      status: user.status,
-      city: user.city,
-      isAttended: true,
-      timeOfArrival: dayjs().format("HH:mm", { timeZone: "Europe/London" }) // convert to CET before formatting
-    };
-    sessionToUpdate.attendance.push(user);
-    const options = { returnOriginal: false };
-    //updating the session data on database
-    collection.findOneAndUpdate(
-      { date: "2019-07-31" }, // { date : selectedDate}
-      {
-        $set: {
-          attendance: sessionToUpdate.attendance
-        }
-      },
-      options,
-      (err, result) => {
-        if (result.value) {
-          // jwt token
-
-          res.send(err || result.value);
-        } else {
-          res.sendStatus(404);
-        }
+      //check the session created or not
+      if (!sessionToUpdate) {
+        res.status(404).send({
+          msg: "The session is not created yet! "
+        });
+        return;
       }
-    );
+      //check if the student is already registered by email or not
+      if (
+        sessionToUpdate.attendance
+          .map(student => {
+            return student.email;
+          })
+          .includes(user.email)
+      ) {
+        res.status(404).send({
+          msg: "You are already logged in to the class!"
+        });
+        return;
+      }
+      user = {
+        userId: user._id,
+        name: user.name,
+        email: user.email,
+        status: user.status,
+        city: user.city,
+        isAttended: true,
+        timeOfArrival: dayjs().format("HH:mm", { timeZone: "Europe/London" }) // convert to CET before formatting
+      };
+      sessionToUpdate.attendance.push(user);
+      const options = { returnOriginal: false };
+      //updating the session data on database
+      collection.findOneAndUpdate(
+        { date: selectedDate }, //{ date: "2019-07-31" }, //
+        {
+          $set: {
+            attendance: sessionToUpdate.attendance
+          }
+        },
+        options,
+        (err, result) => {
+          if (result.value) {
+            // jwt token
+            res.send(err || result.value);
+          } else {
+            res.sendStatus(404);
+          }
+        }
+      );
+    } else {
+      console.log("not student");
+      res.status(200).json({ msg: "You have logged in sucessfully" });
+    }
     client.close();
   }); //client connect
 };
