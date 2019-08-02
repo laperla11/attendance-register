@@ -3,45 +3,31 @@ import StudentsList from "./StudentsList";
 import StudentsAbsents from "./StudentsAbsents";
 import "./index.css";
 import dayjs from "dayjs";
-
 class MentorHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: "",
-      sessions: "",
-      selectedSession: "",
-      selectedSessionDate: "today"
+      selectedSessionDate: dayjs().format("YYYY-MM-DD")
     };
   }
 
   componentWillMount() {
-    this.fetchData();
-  }
-
-  fetchData = async () => {
-    fetch(`api/attendance?date=${this.state.selectedSessionDate}`)
+    fetch(`api/personalAttendance`)
       .then(data => data.json())
       .then(data => this.setState({ data: data }));
-  };
+  }
 
   selectSession = e => {
     const selectedSessionDate = e.target.value;
-    this.setState({ selectedSessionDate }, () => this.fetchData());
+    this.setState({ selectedSessionDate });
   };
 
   render() {
-    const {
-      sessions,
-      name,
-      session,
-      date,
-      attendingStudents,
-      totalAttendingStudents,
-      absentStudents,
-      totalAbsentStudents,
-      proportion
-    } = this.state.data;
+    const { sessions } = this.state.data;
+    const selectedSession =
+      sessions &&
+      sessions.find(session => session.date === this.state.selectedSessionDate);
     const today = dayjs().format("YYYY-MM-DD");
     return (
       <main className="main">
@@ -51,12 +37,14 @@ class MentorHome extends Component {
             <span className="appNameBack">Swift</span>
           </h1>
           <p>Today : {today}</p>
-          {session ? (
+          {selectedSession ? (
             <p>
-              {name} - {session}
+              {selectedSession.name} - {selectedSession.number}
             </p>
           ) : null}
-          <p>Selected Date : {date ? date : today}</p>
+          <p>
+            Selected Date : {selectedSession ? selectedSession.date : today}
+          </p>
           <p>
             Choose a session date{" "}
             <select
@@ -73,33 +61,33 @@ class MentorHome extends Component {
                   .map(session => {
                     return (
                       <option value={session.date}>
-                        {session.date} : {session.name} - {session.session}
+                        {session.date} : {session.name} - {session.number}
                       </option>
                     );
                   })}
             </select>
           </p>
         </section>
-        {session ? (
+        {selectedSession ? (
           <div>
             <div className="table-Results">
               <section className="studentsList">
                 <h2>Students in Class</h2>
                 <StudentsList
-                  students={attendingStudents}
-                  total={totalAttendingStudents}
+                  students={selectedSession.attendingStudents}
+                  total={selectedSession.totalAttendingStudents}
                 />
               </section>
               <section className="studentsList">
                 <h2 className="absent">Students Absents</h2>
                 <StudentsAbsents
-                  students={absentStudents}
-                  total={totalAbsentStudents}
+                  students={selectedSession.absentStudents}
+                  total={selectedSession.totalAbsentStudents}
                 />
               </section>
             </div>
             <p className="attPercentage">
-              Attendance Percentage : {proportion} %
+              Attendance Percentage : {selectedSession.attendanceRate} %
             </p>
           </div>
         ) : (

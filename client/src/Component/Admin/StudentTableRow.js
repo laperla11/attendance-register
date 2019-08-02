@@ -13,7 +13,6 @@ export default class StudentTableRow extends Component {
     this.setState({
       isViewDisplayed: !this.state.isViewDisplayed
     });
-    this.props.handleStudentView(this.props.student.email);
   };
 
   render() {
@@ -49,7 +48,7 @@ export default class StudentTableRow extends Component {
                     .map(session => {
                       return (
                         <p key={session.id}>
-                          {session.name} - {session.session} ({session.date})
+                          {session.name} - {session.number} ({session.date})
                         </p>
                       );
                     })}

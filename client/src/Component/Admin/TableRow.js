@@ -18,7 +18,7 @@ export class TableRow extends Component {
       date,
       city,
       name,
-      session,
+      number,
       attendingStudents,
       totalAttendingStudents,
       absentStudents,
@@ -30,7 +30,7 @@ export class TableRow extends Component {
         <tr key={_id} className="nav-tr-info">
           <td>{date}</td>
           <td>
-            {name} - {session}
+            {name} - {number}
           </td>
           <td>{city}</td>
           <td>

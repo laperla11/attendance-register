@@ -52,8 +52,8 @@ class AdminHome extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { name, date, city, session } = this.state;
-    const reqBody = { name, date, session, city };
+    const { name, date, city, number } = this.state;
+    const reqBody = { name, date, number, city };
     const reqParams = {
       headers: { "Content-Type": "application/json; charset=utf-8" },
       method: "POST",
@@ -104,12 +104,7 @@ class AdminHome extends Component {
                       return b.attendanceRate - a.attendanceRate;
                     })
                     .map(student => {
-                      return (
-                        <StudentTableRow
-                          student={student}
-                          handleStudentView={this.selectStudent}
-                        />
-                      );
+                      return <StudentTableRow student={student} />;
                     })}
               </tbody>
             </Table>
