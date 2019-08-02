@@ -16,7 +16,7 @@ export default class Example extends PureComponent {
   render() {
     console.log(this.props.sessions);
     const data = this.props.sessions.map(session => {
-      return { name: `${session.name}-${session.session}`, "%": Number(session.attendanceRate) };
+      return { name: `${session.name}-${session.number}`, "%": Number(session.attendanceRate) };
     });
     return (
       <BarChart

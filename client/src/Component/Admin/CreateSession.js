@@ -3,7 +3,7 @@ import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap
 
 
 export default function CreateSession(props) {
-  const { handleSubmit, handleChange, name, city, date, session } = props;
+  const { handleSubmit, handleChange, name, city, date, number } = props;
   return (
     <div>
       <Form onSubmit={e => handleSubmit(e)}>
@@ -39,8 +39,8 @@ export default function CreateSession(props) {
           <Col >
             <Input
               type="text"
-              value={session}
-              name="session"
+              value={number}
+              name="number"
               placeholder="Session"
               className="input form-control"
               onChange={e => handleChange(e)}

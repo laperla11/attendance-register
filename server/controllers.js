@@ -104,7 +104,7 @@ export const getPersonalAttendance = (req, res, next) => {
             student.attendance.push({
               id: session._id,
               name: session.name,
-              session: session.session,
+              number: session.number,
               date: session.date
             });
           } else {
@@ -112,7 +112,7 @@ export const getPersonalAttendance = (req, res, next) => {
             student.absence.push({
               id: session._id,
               name: session.name,
-              session: session.session,
+              session: session.number,
               date: session.date
             });
           }
@@ -146,10 +146,12 @@ export const getPersonalAttendance = (req, res, next) => {
           ).toFixed(2);
         });
 
-        student["attendanceRate"] = Number((
-          (100 * student.attendance.length) /
-          (student.attendance.length + student.absence.length)
-        ).toFixed(2));
+        student["attendanceRate"] = Number(
+          (
+            (100 * student.attendance.length) /
+            (student.attendance.length + student.absence.length)
+          ).toFixed(2)
+        );
       });
       res.send(err || { students, sessions, modules });
     });
@@ -178,8 +180,8 @@ export const createSession = (req, res) => {
       return next(err);
     }
     let { latitude, longitude } = req.query;
-    let { name, session, date, city } = req.body;
-    if (!name || !session || !date || !city) {
+    let { name, number, date, city } = req.body;
+    if (!name || !number || !date || !city) {
       res.sendStatus(400);
       return;
     }
@@ -188,7 +190,7 @@ export const createSession = (req, res) => {
     let studentUsers = [];
     const newSession = {
       name,
-      session,
+      number,
       date,
       city,
       latitude: latitude ? latitude : "51.53",
@@ -210,11 +212,11 @@ export const createSession = (req, res) => {
     if (err) {
       return next(err);
     }
-    let { name, session, date, city } = req.body;
+    let { name, number, date, city } = req.body;
     const updateObject = {};
     name ? (updateObject.name = name) : null;
     city ? (updateObject.city = city) : null;
-    session ? (updateObject.session = session) : null;
+    number ? (updateObject.number = number) : null;
     date ? (updateObject.date = date) : null;
     // console.log(updateObject);
     const db = client.db("heroku_cs1q5qk5");
@@ -383,7 +385,7 @@ export const login = (req, res, next) => {
     //if no matching with the provided email
     if (!user) {
       res.status(404).json({
-        msg: "your email is wrong"
+        msg: "Your email is wrong"
       });
       return;
     }
@@ -397,7 +399,6 @@ export const login = (req, res, next) => {
       return;
     }
     //checking the password
-    // console.log("password", user.password, req.body.password);
     if (user.password != password) {
       res.status(400).json({
         msg: `Your password is wrong!`
@@ -405,11 +406,11 @@ export const login = (req, res, next) => {
       return;
     }
     //if the password is correct
-    const today = dayjs().format("DD/MM/YYYY");
+    const today = dayjs().format("YYYY-MM-DD");
     const selectedDate = req.query.date ? req.query.date : today;
     collection = db.collection("sessions");
     const sessionToUpdate = await collection.findOne({
-      date: "31/07/2019" //hard coded for testing reality date : selectedDate
+      date: "2019-07-31" //hard coded for testing reality date : selectedDate
     });
     if (!sessionToUpdate && status.toLowerCase() == "student") {
       res.status(404).send({
@@ -445,7 +446,7 @@ export const login = (req, res, next) => {
     const options = { returnOriginal: false };
     //updating the session data on database
     collection.findOneAndUpdate(
-      { date: "31/07/2019" }, // { date : selectedDate}
+      { date: "2019-07-31" }, // { date : selectedDate}
       {
         $set: {
           attendance: sessionToUpdate.attendance
