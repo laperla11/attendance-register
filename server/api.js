@@ -4,7 +4,6 @@ import {
   getSessions,
   getAttendance,
   createSession,
-  getAttendance,
   updateSession,
   register,
   login
