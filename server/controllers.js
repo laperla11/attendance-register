@@ -222,7 +222,9 @@ export const register = (req, res, next) => {
     });
     Joi.validate(req.body, schema, (err, result) => {
       if (err) {
-        return res.status(422).json({ msg: err.details[0].message });
+        return res.status(422).json({
+          msg: err.details[0].message
+        });
       }
       return;
     });
@@ -233,15 +235,21 @@ export const register = (req, res, next) => {
       email: email
     });
     if (checkUser) {
-      res.status(404).json({ msg: "This email is already in use" });
+      res.status(404).json({
+        msg: "This email is already in use"
+      });
       return;
     }
     //if the email is not in use
+    //Hash the password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    //Save the user
     const user = new User({
       name: name,
       email: email,
-      //password: hashedPwd,
-      password: password,
+      password: hashedPassword,
+      // password: password,
       status: status
     });
     collection.insertOne(user, (err, result) => {
@@ -270,7 +278,9 @@ export const login = (req, res, next) => {
     });
     Joi.validate(req.body, schema, (err, result) => {
       if (err) {
-        return res.status(422).json({ msg: err.details[0].message });
+        return res.status(422).json({
+          msg: err.details[0].message
+        });
       }
       return;
     });
@@ -297,15 +307,17 @@ export const login = (req, res, next) => {
       });
       return;
     }
-    //checking the password
-    if (user.password != password) {
-      res.status(400).json({
-        msg: `Your password is wrong!`
-      });
-      return;
-    }
-    //if the password is correct
 
+    //Check the hashed password
+    const validPassword = await bcrypt.compare(
+      password,
+      user.password
+    );
+    if (!validPassword) {
+      return res.status(400).send({msg :"Wrong password !"});
+    }
+
+    //if the password is correct
     const today = dayjs().format("YYYY-MM-DD");
     const selectedDate = req.query.date ? req.query.date : today;
     if (user.status.toLowerCase() === "student") {
@@ -341,13 +353,19 @@ export const login = (req, res, next) => {
         status: user.status,
         city: user.city,
         isAttended: true,
-        timeOfArrival: dayjs().format("HH:mm", { timeZone: "Europe/London" }) // convert to CET before formatting
+        timeOfArrival: dayjs().format("HH:mm", {
+          timeZone: "Europe/London"
+        }) // convert to CET before formatting
       };
       sessionToUpdate.attendance.push(user);
-      const options = { returnOriginal: false };
+      const options = {
+        returnOriginal: false
+      };
       //updating the session data on database
       collection.findOneAndUpdate(
-        { date: selectedDate }, //{ date: "2019-07-31" }, //
+        {
+          date: selectedDate
+        }, //{ date: "2019-07-31" }, //
         {
           $set: {
             attendance: sessionToUpdate.attendance
@@ -365,7 +383,9 @@ export const login = (req, res, next) => {
       );
     } else {
       console.log("not student");
-      res.status(200).json({ msg: "You have logged in sucessfully" });
+      res.status(200).json({
+        msg: "You have logged in sucessfully"
+      });
     }
     client.close();
   }); //client connect
