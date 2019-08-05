@@ -32,7 +32,7 @@ class AdminHome extends Component {
       date: "",
       city: "",
       session: "",
-      isStudentViewDisplayed: false,
+      // isStudentViewDisplayed: false,
       activeTab: "1"
     };
   }
